@@ -1,6 +1,0 @@
-const pkgs=document.querySelectorAll('.package');let selected=null,method=null;
-const uid=document.querySelector('#uid');uid.addEventListener('input',()=>document.querySelector('#summaryUid').textContent=uid.value.trim()||'—');
-pkgs.forEach(b=>b.addEventListener('click',()=>{pkgs.forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selected=b;document.querySelector('#selected').textContent=b.dataset.amount+' 💎';document.querySelector('#total').textContent='৳'+b.dataset.price}));
-document.querySelector('#order').addEventListener('click',()=>{if(!uid.value.trim())return alert('Please enter your Player ID / UID.');if(!selected)return alert('Please select a package.');document.querySelector('#payment').classList.remove('hidden');document.querySelector('#payment').scrollIntoView({behavior:'smooth',block:'center'})});
-document.querySelectorAll('.pay button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.pay button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');method=b.dataset.method;document.querySelector('#method').textContent=method}));
-document.querySelector('#pay').addEventListener('click',()=>{if(!method)return alert('Please select bKash or Nagad.');alert('Demo payment successful! No real money was charged.')});
