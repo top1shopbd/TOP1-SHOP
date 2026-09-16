@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOP1 SHOP</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin: 20px 0 30px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .diamond {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .diamond button {
+      padding: 14px;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      background: #334155;
+      color: white;
+      cursor: pointer;
+    }
+
+    .diamond button.selected {
+      border: 2px solid #22c55e;
+      background: #14532d;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .uid-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    #uid {
+      flex: 1;
+      min-width: 0;
+      padding: 13px;
+      border: 0;
+      border-radius: 9px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    #checkNameBtn {
+      padding: 13px 14px;
+      border: 0;
+      border-radius: 9px;
+      background: #22c55e;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #checkNameBtn:disabled {
+      opacity: 0.6;
+    }
+
+    #playerName {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #0f172a;
+      display: none;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      TOP1 SHOP
+    </div>
+
+    <div class="card">
+
+      <div class="title">
+        Select Diamond
+      </div>
+
+      <div class="diamond">
+        <button onclick="selectDiamond(this, '25 Diamonds')">
+          25 Diamonds
+        </button>
+
+        <button onclick="selectDiamond(this, '100 Diamonds')">
+          100 Diamonds
+        </button>
+
+        <button onclick="selectDiamond(this, '310 Diamonds')">
+          310 Diamonds
+        </button>
+
+        <button onclick="selectDiamond(this, '520 Diamonds')">
+          520 Diamonds
+        </button>
+      </div>
+
+      <label for="uid">
+        Free Fire UID
+      </label>
+
+      <div class="uid-row">
+        <input
+          type="number"
+          id="uid"
+          placeholder="Enter UID"
+          inputmode="numeric"
+        >
+
+        <button id="checkNameBtn" type="button">
+          Check Name
+        </button>
+      </div>
+
+      <div id="playerName"></div>
+
+      <div id="message" class="message"></div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    let selectedDiamond = "";
+
+    function selectDiamond(button, diamond) {
+
+      document
+        .querySelectorAll(".diamond button")
+        .forEach(btn => btn.classList.remove("selected"));
+
+      button.classList.add("selected");
+
+      selectedDiamond = diamond;
+
+    }
+
+
+    const uidInput = document.getElementById("uid");
+    const checkNameBtn = document.getElementById("checkNameBtn");
+    const playerName = document.getElementById("playerName");
+    const message = document.getElementById("message");
+
+
+    checkNameBtn.addEventListener("click", async function () {
+
+      const uid = uidInput.value.trim();
+
+      playerName.style.display = "none";
+      message.textContent = "";
+
+      if (!selectedDiamond) {
+        message.textContent = "Please select Diamond first.";
+        return;
+      }
+
+      if (!uid) {
+        message.textContent = "Please enter your UID.";
+        return;
+      }
+
+      checkNameBtn.disabled = true;
+      checkNameBtn.textContent = "Checking...";
+
+      /*
+       * IMPORTANT:
+       * এখানে আসল Free Fire UID API বসাতে হবে।
+       *
+       * উদাহরণ:
+       * const API_URL =
+       * "YOUR_API_URL?uid=" + encodeURIComponent(uid);
+       */
+
+      try {
+
+        /*
+         * API না থাকায় এখন Demo response দেখানো হচ্ছে।
+         * আসল Player Name পাওয়ার জন্য এখানে API connect করতে হবে।
+         */
+
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        playerName.textContent =
+          "Player Name: API Required";
+
+        playerName.style.display = "block";
+
+        message.textContent =
+          "UID received. Connect a Free Fire UID API to show the real name.";
+
+      } catch (error) {
+
+        message.textContent =
+          "Name check failed. Please try again.";
+
+      }
+
+      checkNameBtn.disabled = false;
+      checkNameBtn.textContent = "Check Name";
+
+    });
+
+  </script>
+
+</body>
+        </html>
