@@ -22,25 +22,32 @@ function render(){ $("pkgs").innerHTML=P.map((p,i)=>`<div class="card pkg ${sele
 function choose(i){selected=i;$("summary").innerHTML=`<b>${P[i][0]}</b> — ৳${P[i][1]}<br><span class="notice">UID: ${$("uid").value||"Not entered"}</span>`;render()}
 function openM(x){$(x).classList.add("show")}function closeM(x){$(x).classList.remove("show")}
 function addMoney(){let a=+$("amount").value;if(a<=0)return alert("সঠিক amount দিন");bal+=a;localStorage.setItem("top1shop_balance",bal);render();$("amount").value="";closeM("add");alert("Demo wallet balance যোগ হয়েছে।")}
-function checkName(){let u=$("uid").value.trim();$("res").style.display="block";$("res").textContent=/^\d{6,15}$/.test(u)?"Demo mode: আসল player name API এখনো যুক্ত করা হয়নি।":"সঠিক UID লিখুন।"}
+async function checkName(){
+  const u=$("uid").value.trim();
+  $("res").style.display="block";
+  $("res").textContent="🔍 Checking...";
+
+  if(!/^\d{6,15}$/.test(u)){
+    $("res").textContent="সঠিক UID লিখুন।";
+    return;
+  }
+
+  try{
+    const response=await fetch("/api/check-name?uid="+encodeURIComponent(u));
+    const data=await response.json();
+
+    if(!response.ok){
+      $("res").textContent="❌ "+(data.error||"Game Name পাওয়া যায়নি।");
+      return;
+    }
+
+    $("res").textContent="✅ Game Name: "+data.name;
+  }catch(error){
+    $("res").textContent="❌ Server connection error। আবার চেষ্টা করুন।";
+  }
+}
 function payment(){if(selected<0)return alert("আগে Diamond package নির্বাচন করুন।");if(!$("uid").value.trim())return alert("আগে UID দিন।");$("paySum").innerHTML=`${P[selected][0]} — ৳${P[selected][1]}<br>UID: ${$("uid").value}`;$("trx").value="";$("status").innerHTML="";openM("pay")}
 function method(el,m){document.querySelectorAll(".pay").forEach(x=>x.classList.remove("on"));el.classList.add("on");pm=m;$("num").textContent="Demo "+m+" Payment Number: 01XXXXXXXXX"}
 function verify(){let t=$("trx").value.trim();if(!t)return alert("Transaction ID দিন।");let p=P[selected],u=$("uid").value.trim();$("status").innerHTML=`<div class="success">Demo Payment Successful ✅<br>${p[0]} → UID ${u}<br>${pm} · TRX: ${t}</div>`;if($("orders").textContent.includes("এখনও"))$("orders").innerHTML="";$("orders").innerHTML=`<div class="row"><b>${p[0]}</b> — ৳${p[1]}<br><small>UID: ${u} · ${pm} · Demo Successful</small></div>`+$("orders").innerHTML}
 render();
-</script>
-<!-- TOP1 SHOP: Auto Top-Up style demo flow -->
-<section style="max-width:900px;margin:18px auto;padding:16px;border-radius:18px;background:linear-gradient(135deg,#111827,#1f2937);color:#fff;font-family:Arial,sans-serif;box-shadow:0 8px 28px rgba(0,0,0,.22)">
-  <h3 style="margin:0 0 12px">⚡ TOP1 SHOP Auto Top-Up Flow</h3>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px;font-size:13px">
-    <div style="padding:10px;border-radius:12px;background:#ffffff12">1️⃣ UID<br><b>Check Name</b></div>
-    <div style="padding:10px;border-radius:12px;background:#ffffff12">2️⃣ Package<br><b>Select Diamonds</b></div>
-    <div style="padding:10px;border-radius:12px;background:#ffffff12">3️⃣ Payment<br><b>bKash / Nagad</b></div>
-    <div style="padding:10px;border-radius:12px;background:#ffffff12">4️⃣ Transaction ID<br><b>Submit</b></div>
-    <div style="padding:10px;border-radius:12px;background:#ffffff12">5️⃣ Order Status<br><b>Pending Verification</b></div>
-  </div>
-  <p style="margin:12px 0 0;font-size:12px;opacity:.8">
-    Demo flow only. Real payment verification and automatic diamond delivery require an authorized provider and secure backend.
-  </p>
-</section>
-
-</body></html>
+</script></body></html>
