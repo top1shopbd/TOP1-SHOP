@@ -3,1347 +3,585 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOP1 SHOP - Free Fire Top Up</title>
+<title>TOP1 SHOP</title>
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --blue:#1768e8;
+  --blue2:#123b8d;
+  --red:#ef2939;
+  --bg:#f5f7fb;
+  --text:#182033;
+  --muted:#8a92a1;
+  --white:#fff;
+  --border:#e3e6ec;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:#f4f6fa;
-  color:#172033;
-  padding-bottom:90px;
+  background:var(--bg);
+  color:var(--text);
+  padding-bottom:100px;
 }
 
-header{
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+input{
+  font-family:inherit;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+  height:76px;
   background:#fff;
-  padding:18px 25px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  box-shadow:0 2px 12px rgba(0,0,0,.08);
+  padding:0 22px;
   position:sticky;
   top:0;
-  z-index:20;
+  z-index:100;
+  box-shadow:0 2px 15px rgba(0,0,0,.06);
 }
 
 .logo{
-  font-size:34px;
+  font-size:31px;
   font-weight:900;
   font-style:italic;
   letter-spacing:-2px;
 }
 
-.logo .top{
-  color:#2166df;
+.logo-blue{
+  color:var(--blue);
 }
 
-.logo .shop{
-  color:#ed2939;
+.logo-red{
+  color:var(--red);
 }
 
 .header-right{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:13px;
 }
 
-.balance-mini{
-  background:#edf4ff;
-  color:#1761d5;
-  padding:14px 18px;
-  border-radius:18px;
-  font-size:20px;
-  font-weight:bold;
+.cart-btn{
+  border:0;
+  background:transparent;
+  font-size:27px;
 }
 
 .login-btn{
   border:0;
-  background:#2867dc;
-  color:white;
-  padding:15px 22px;
+  background:var(--blue);
+  color:#fff;
+  padding:14px 20px;
   border-radius:16px;
-  font-size:17px;
+  font-size:16px;
   font-weight:bold;
 }
+
+/* ================= CONTAINER ================= */
 
 .container{
   width:min(900px,94%);
   margin:auto;
 }
 
+/* ================= PAGES ================= */
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+/* ================= HOME HERO ================= */
+
 .hero{
-  margin-top:30px;
-  padding:40px 32px;
-  border-radius:38px;
-  background:linear-gradient(135deg,#173d82,#1769ee);
+  margin-top:20px;
+  min-height:245px;
+  border-radius:32px;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(135deg,#eef4ff,#dce9ff);
+  padding:32px;
+  display:flex;
+  align-items:center;
+}
+
+.hero-text{
+  width:63%;
+  position:relative;
+  z-index:2;
+}
+
+.hero-text h1{
+  color:var(--blue);
+  font-size:34px;
+  line-height:1.15;
+}
+
+.hero-text h1 span{
+  color:var(--red);
+}
+
+.hero-text p{
+  margin-top:14px;
+  color:#4b5870;
+  font-size:17px;
+  line-height:1.5;
+}
+
+.hero-character{
+  position:absolute;
+  right:10px;
+  bottom:0;
+  width:39%;
+  height:90%;
+  display:flex;
+  justify-content:center;
+  align-items:end;
+}
+
+.character{
+  width:145px;
+  height:170px;
+  border-radius:75px 75px 22px 22px;
+  background:linear-gradient(145deg,#1596ff,#173d9d);
+  position:relative;
+  box-shadow:0 15px 35px rgba(20,65,160,.3);
+}
+
+.character:before{
+  content:"";
+  position:absolute;
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  background:#ffd7bc;
+  left:35px;
+  top:-42px;
+}
+
+.character:after{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:34px;
+  border-radius:50% 50% 20% 20%;
+  background:#12d4ff;
+  left:28px;
+  top:-49px;
+  transform:rotate(-8deg);
+}
+
+/* ================= DOTS ================= */
+
+.dots{
+  text-align:center;
+  margin:10px 0 16px;
+}
+
+.dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:#c7ccd5;
+  border-radius:50%;
+  margin:3px;
+}
+
+.dot.active{
+  background:var(--blue);
+}
+
+/* ================= QUICK ================= */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.quick{
+  background:#fff;
+  border-radius:20px;
+  padding:16px 8px;
+  text-align:center;
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.quick-icon{
+  font-size:27px;
+}
+
+.quick small{
+  display:block;
+  color:#a0a6b0;
+  margin-top:4px;
+}
+
+.quick b{
+  font-size:14px;
+}
+
+/* ================= SPIN ================= */
+
+.spin{
+  margin-top:22px;
+  background:#fff8df;
+  border:1px solid #f2df9f;
+  border-radius:23px;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.spin-icon{
+  width:62px;
+  height:62px;
+  border-radius:19px;
+  background:#ff9b00;
   color:#fff;
-  box-shadow:0 15px 35px rgba(20,83,180,.22);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
 }
 
-.hero h1{
-  font-size:42px;
-  margin-bottom:18px;
+.spin-text small{
+  color:#e06d18;
+  font-weight:bold;
 }
 
-.hero p{
-  font-size:22px;
-  line-height:1.6;
+.spin-text b{
+  display:block;
+  margin-top:5px;
+  font-size:16px;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+  margin-top:35px;
 }
 
 .section-title{
-  font-size:30px;
-  font-weight:900;
-  margin:42px 0 20px;
+  font-size:27px;
+  text-align:center;
+  margin-bottom:19px;
 }
 
-.uid-box{
-  background:white;
-  border-radius:28px;
-  padding:28px;
-  box-shadow:0 10px 30px rgba(0,0,0,.07);
+/* ================= UID ================= */
+
+.uid-card{
+  background:#fff;
+  border-radius:25px;
+  padding:23px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
 }
 
-.uid-label{
-  font-size:23px;
+.uid-card label{
+  display:block;
+  font-size:19px;
   font-weight:bold;
-  margin-bottom:14px;
+  margin-bottom:10px;
 }
 
-input{
+.uid-card input,
+.form-input{
   width:100%;
-  padding:19px;
-  border:1px solid #d8dce4;
-  border-radius:20px;
-  font-size:20px;
+  padding:17px;
+  border:1px solid #dfe2e8;
+  border-radius:16px;
+  font-size:18px;
   outline:none;
 }
 
-input:focus{
-  border-color:#2870e8;
+.uid-card input:focus,
+.form-input:focus{
+  border-color:var(--blue);
 }
 
 .check-btn{
   width:100%;
-  margin-top:14px;
-  padding:18px;
   border:0;
-  border-radius:20px;
-  background:#172033;
+  background:#182033;
   color:#fff;
-  font-size:20px;
+  padding:17px;
+  border-radius:16px;
+  margin-top:12px;
+  font-size:18px;
   font-weight:bold;
 }
 
 .result{
   display:none;
-  margin-top:15px;
-  padding:15px;
-  border-radius:15px;
-  font-size:17px;
+  margin-top:12px;
+  padding:13px;
+  border-radius:13px;
   font-weight:bold;
 }
 
-/* PACKAGE */
-.package-grid{
+/* ================= PRODUCTS ================= */
+
+.product-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  gap:14px;
 }
 
-.package-card{
+.product{
   background:#fff;
   border:2px solid transparent;
-  border-radius:22px;
-  padding:22px 16px;
+  border-radius:21px;
+  padding:20px 10px;
   text-align:center;
-  box-shadow:0 7px 20px rgba(0,0,0,.06);
-  cursor:pointer;
-  transition:.2s;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
+  transition:.15s;
 }
 
-.package-card:active{
+.product:active{
   transform:scale(.97);
 }
 
-.package-card.selected{
-  border-color:#1769ee;
-  background:#eef5ff;
-  box-shadow:0 8px 25px rgba(23,105,238,.18);
+.product.selected{
+  border-color:var(--blue);
+  background:#edf5ff;
 }
 
-.package-icon{
-  font-size:40px;
-  margin-bottom:8px;
+.product-icon{
+  font-size:38px;
 }
 
-.package-name{
-  font-size:19px;
-  font-weight:800;
-  min-height:46px;
+.product-name{
+  min-height:42px;
+  margin-top:7px;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
+  font-size:16px;
+  font-weight:bold;
 }
 
-.package-price{
-  color:#1765db;
-  font-size:25px;
+.product-price{
+  margin-top:8px;
+  color:var(--blue);
+  font-size:23px;
   font-weight:900;
-  margin-top:10px;
 }
 
-/* SUMMARY */
+/* ================= SUMMARY ================= */
+
 .summary{
   background:#fff;
-  margin-top:25px;
-  padding:25px;
   border-radius:25px;
-  box-shadow:0 8px 25px rgba(0,0,0,.07);
+  padding:23px;
+  margin-top:22px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
 }
 
 .summary h3{
-  font-size:24px;
-  margin-bottom:15px;
+  margin-bottom:13px;
 }
 
-.summary-content{
+.summary-info{
   line-height:1.8;
-  font-size:18px;
+  color:#424b5d;
 }
 
-.order-btn{
+.order-btn,
+.primary-btn{
   width:100%;
-  margin-top:18px;
   border:0;
-  padding:18px;
-  border-radius:18px;
-  background:#1769ee;
+  background:var(--blue);
   color:#fff;
-  font-size:20px;
+  padding:17px;
+  border-radius:17px;
+  margin-top:15px;
+  font-size:18px;
   font-weight:bold;
 }
 
-/* WALLET */
-.wallet{
-  background:linear-gradient(135deg,#193f8b,#1f69ec);
-  color:white;
-  border-radius:30px;
-  padding:28px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  box-shadow:0 15px 30px rgba(20,80,180,.18);
+/* ================= BLUE HERO PAGES ================= */
+
+.page-hero{
+  margin-top:20px;
+  background:linear-gradient(135deg,#2c57ae,#12357e);
+  color:#fff;
+  border-radius:32px;
+  padding:34px;
+  box-shadow:0 15px 35px rgba(20,65,150,.2);
 }
 
-.wallet small{
+.page-badge{
+  display:inline-block;
+  background:rgba(255,255,255,.13);
+  padding:10px 15px;
+  border-radius:20px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.page-hero h1{
+  font-size:34px;
+  margin-top:18px;
+}
+
+.page-hero p{
+  margin-top:12px;
+  color:#dce7ff;
   font-size:17px;
+  line-height:1.6;
 }
 
-.wallet-money{
-  font-size:36px;
-  font-weight:900;
+/* ================= ORDERS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:22px;
+}
+
+.stat{
+  background:rgba(255,255,255,.1);
+  padding:17px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.stat small{
+  color:#dce7ff;
+}
+
+.stat b{
+  display:block;
+  font-size:24px;
+  margin-top:4px;
+}
+
+.order-search{
+  background:#fff;
+  margin-top:22px;
+  padding:22px;
+  border-radius:25px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
+
+.order-search h3{
+  margin-bottom:14px;
+}
+
+.order-item{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:17px;
+  margin-top:12px;
+}
+
+.empty{
+  text-align:center;
+  padding:30px 10px;
+  color:var(--muted);
+}
+
+/* ================= ADD MONEY ================= */
+
+.money-card{
+  background:#fff;
+  border-radius:25px;
+  padding:24px;
+  margin-top:22px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
+
+.balance-big{
+  background:linear-gradient(135deg,#2453ad,#1769e8);
+  color:#fff;
+  border-radius:22px;
+  padding:23px;
+}
+
+.balance-big small{
+  color:#dce7ff;
+}
+
+.balance-big b{
+  display:block;
+  font-size:34px;
   margin-top:5px;
 }
 
-.add-money{
-  background:white;
-  color:#2162d2;
-  border:0;
-  padding:16px 20px;
+.payment-title{
+  margin:23px 0 12px;
+  font-size:19px;
+  font-weight:bold;
+}
+
+.payment-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.payment{
+  border:2px solid var(--border);
+  padding:18px;
   border-radius:17px;
-  font-size:17px;
+  text-align:center;
   font-weight:bold;
 }
 
-/* ORDERS */
-.order-box{
+.payment.active{
+  border-color:var(--blue);
+  background:#edf5ff;
+}
+
+/* ================= SUPPORT ================= */
+
+.support-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:22px;
+}
+
+.support-card{
   background:#fff;
-  padding:25px;
-  border-radius:25px;
-  box-shadow:0 8px 25px rgba(0,0,0,.06);
+  border-radius:24px;
+  padding:23px;
+  min-height:205px;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
 }
 
-.empty-order{
-  text-align:center;
-  color:#858b98;
-  font-size:18px;
-  padding:20px 0;
+.support-icon{
+  font-size:42px;
 }
 
-/* SUPPORT */
-.support{
-  background:white;
-  padding:25px;
-  border-radius:25px;
-  box-shadow:0 8px 25px rgba(0,0,0,.06);
-  line-height:1.8;
-  font-size:18px;
-}
-
-/* BOTTOM NAV */
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:82px;
-  background:white;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:30;
-}
-
-.nav-item{
-  text-align:center;
-  color:#818895;
-  font-weight:bold;
-  font-size:14px;
-  cursor:pointer;
-}
-
-.nav-icon{
-  font-size:25px;
-  display:block;
-  margin-bottom:4px;
-}
-
-.nav-item.active{
-  color:#2366d8;
-}
-
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:50;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal-box{
-  background:white;
-  width:min(500px,100%);
-  border-radius:28px;
-  padding:28px;
-}
-
-.modal-box h2{
-  margin-bottom:20px;
-}
-
-.close{
-  float:right;
-  border:0;
-  background:#eee;
-  width:35px;
-  height:35px;
-  border-radius:50%;
+.support-card h3{
+  margin-top:15px;
   font-size:20px;
 }
 
-.payment-option{
-  padding:18px;
-  border:2px solid #ddd;
-  border-radius:17px;
-  margin:10px 0;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.payment-option.active{
-  border-color:#1769ee;
-  background:#eef5ff;
-}
-
-.modal-btn{
-  width:100%;
-  border:0;
-  padding:17px;
-  border-radius:17px;
-  background:#1769ee;
-  color:#fff;
-  font-size:18px;
-  font-weight:bold;
-  margin-top:15px;
-}
-
-/* MOBILE */
-@media(max-width:600px){
-
-  header{
-    padding:16px;
-  }
-
-  .logo{
-    font-size:29px;
-  }
-
-  .balance-mini{
-    padding:12px 14px;
-    font-size:17px;
-  }
-
-  .login-btn{
-    padding:13px 15px;
-    font-size:15px;
-  }
-
-  .hero{
-    margin-top:25px;
-    padding:30px 24px;
-    border-radius:32px;
-  }
-
-  .hero h1{
-    font-size:31px;
-  }
-
-  .hero p{
-    font-size:18px;
-  }
-
-  .section-title{
-    font-size:27px;
-    margin-top:35px;
-  }
-
-  .package-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .package-card{
-    padding:18px 10px;
-  }
-
-  .package-icon{
-    font-size:34px;
-  }
-
-  .package-name{
-    font-size:16px;
-  }
-
-  .package-price{
-    font-size:22px;
-  }
-
-  .wallet{
-    padding:24px 20px;
-  }
-
-  .wallet-money{
-    font-size:30px;
-  }
-
-  .add-money{
-    padding:14px 15px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="logo">
-    <span class="top">TOP1</span>
-    <span class="shop">SHOP</span>
-  </div>
-
-  <div class="header-right">
-    <div class="balance-mini">৳ <span id="miniBalance">0</span></div>
-    <button class="login-btn" onclick="openLogin()">→ Login</button>
-  </div>
-</header>
-
-
-<main class="container">
-
-  <!-- HERO -->
-  <section class="hero">
-    <h1>FREE FIRE TOP UP 💎</h1>
-    <p>
-      সহজে তোমার Free Fire UID-এর জন্য
-      Diamond ও Membership Order করো।
-    </p>
-  </section>
-
-
-  <!-- UID -->
-  <h2 class="section-title">💎 DIAMOND & MEMBERSHIP</h2>
-
-  <section class="uid-box">
-    <div class="uid-label">Free Fire UID</div>
-
-    <input
-      id="uid"
-      type="number"
-      inputmode="numeric"
-      placeholder="তোমার UID লিখুন"
-    >
-
-    <button class="check-btn" onclick="checkName()">
-      🔍 CHECK NAME
-    </button>
-
-    <div id="result" class="result"></div>
-  </section>
-
-
-  <!-- PACKAGES -->
-  <section>
-    <h2 class="section-title">💎 Diamond Package</h2>
-
-    <div id="packages" class="package-grid"></div>
-  </section>
-
-
-  <!-- MEMBERSHIP -->
-  <section>
-    <h2 class="section-title">🔥 Membership</h2>
-
-    <div id="memberships" class="package-grid"></div>
-  </section>
-
-
-  <!-- SUMMARY -->
-  <section class="summary">
-    <h3>🧾 Order Summary</h3>
-
-    <div id="summaryContent" class="summary-content">
-      কোনো Package Select করা হয়নি।
-    </div>
-
-    <button class="order-btn" onclick="placeOrder()">
-      🛒 ORDER NOW
-    </button>
-  </section>
-
-
-  <!-- WALLET -->
-  <h2 class="section-title">💰 WALLET</h2>
-
-  <section class="wallet">
-    <div>
-      <small>Wallet Balance</small>
-      <div class="wallet-money">
-        ৳ <span id="balance">0</span>
-      </div>
-    </div>
-
-    <button class="add-money" onclick="openAddMoney()">
-      ＋ Add Money
-    </button>
-  </section>
-
-
-  <!-- ORDERS -->
-  <h2 class="section-title">🧾 ORDERS</h2>
-
-  <section class="order-box">
-    <div id="orders">
-      <div class="empty-order">
-        এখনো কোনো Order নেই।
-      </div>
-    </div>
-  </section>
-
-
-  <!-- SUPPORT -->
-  <h2 class="section-title">🎧 SUPPORT</h2>
-
-  <section class="support">
-    <b>TOP1 SHOP Support</b>
-    <br><br>
-    কোনো সমস্যা হলে Support-এর সাথে যোগাযোগ করুন।
-    <br><br>
-    🕐 Support: 24/7
-  </section>
-
-</main>
-
-
-<!-- ADD MONEY MODAL -->
-<div id="moneyModal" class="modal">
-
-  <div class="modal-box">
-
-    <button class="close" onclick="closeModal('moneyModal')">×</button>
-
-    <h2>💰 Add Money</h2>
-
-    <p>
-      Payment method নির্বাচন করুন।
-    </p>
-
-    <div
-      class="payment-option active"
-      onclick="selectPayment(this,'bKash')"
-    >
-      🟣 bKash
-    </div>
-
-    <div
-      class="payment-option"
-      onclick="selectPayment(this,'Nagad')"
-    >
-      🟠 Nagad
-    </div>
-
-    <input
-      id="moneyAmount"
-      type="number"
-      placeholder="Amount লিখুন"
-      style="margin-top:10px;"
-    >
-
-    <button class="modal-btn" onclick="demoAddMoney()">
-      Continue
-    </button>
-
-  </div>
-</div>
-
-
-<!-- LOGIN MODAL -->
-<div id="loginModal" class="modal">
-
-  <div class="modal-box">
-
-    <button class="close" onclick="closeModal('loginModal')">×</button>
-
-    <h2>→ Login</h2>
-
-    <input
-      id="loginEmail"
-      type="text"
-      placeholder="Email / Username"
-    >
-
-    <input
-      id="loginPassword"
-      type="password"
-      placeholder="Password"
-      style="margin-top:12px;"
-    >
-
-    <button class="modal-btn" onclick="demoLogin()">
-      Login
-    </button>
-
-  </div>
-</div>
-
-
-<!-- PAYMENT MODAL -->
-<div id="paymentModal" class="modal">
-
-  <div class="modal-box">
-
-    <button class="close" onclick="closeModal('paymentModal')">×</button>
-
-    <h2>💳 Payment</h2>
-
-    <p id="paymentText"></p>
-
-    <div
-      class="payment-option active"
-      onclick="selectPayment(this,'bKash')"
-    >
-      🟣 bKash
-    </div>
-
-    <div
-      class="payment-option"
-      onclick="selectPayment(this,'Nagad')"
-    >
-      🟠 Nagad
-    </div>
-
-    <input
-      id="transactionId"
-      type="text"
-      placeholder="Transaction ID"
-      style="margin-top:12px;"
-    >
-
-    <button class="modal-btn" onclick="demoVerifyPayment()">
-      Verify Payment
-    </button>
-
-  </div>
-</div>
-
-
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-
-  <div class="nav-item active" onclick="scrollToTop()">
-    <span class="nav-icon">⌂</span>
-    Home
-  </div>
-
-  <div class="nav-item" onclick="scrollToOrders()">
-    <span class="nav-icon">🧾</span>
-    Orders
-  </div>
-
-  <div class="nav-item" onclick="openAddMoney()">
-    <span class="nav-icon">▣</span>
-    Add Money
-  </div>
-
-  <div class="nav-item" onclick="scrollToSupport()">
-    <span class="nav-icon">◉</span>
-    Support
-  </div>
-
-</nav>
-
-
-<script>
-
-/* =========================
-   PACKAGE DATA
-========================= */
-
-const diamondPackages = [
-  {
-    name:"25 Diamonds",
-    price:20,
-    icon:"💎"
-  },
-  {
-    name:"50 Diamonds",
-    price:35,
-    icon:"💎"
-  },
-  {
-    name:"115 Diamonds",
-    price:78,
-    icon:"💎"
-  },
-  {
-    name:"240 Diamonds",
-    price:155,
-    icon:"💎"
-  },
-  {
-    name:"610 Diamonds",
-    price:395,
-    icon:"💎"
-  },
-  {
-    name:"1240 Diamonds",
-    price:795,
-    icon:"💎"
-  }
-];
-
-
-const memberships = [
-  {
-    name:"Weekly Membership",
-    price:152,
-    icon:"🔥"
-  },
-  {
-    name:"Monthly Membership",
-    price:760,
-    icon:"📅"
-  },
-  {
-    name:"Weekly Lite",
-    price:40,
-    icon:"⭐"
-  }
-];
-
-
-/* =========================
-   VARIABLES
-========================= */
-
-let selectedPackage = null;
-let selectedPayment = "bKash";
-
-let balance =
-  Number(localStorage.getItem("top1shop_balance") || 0);
-
-let orders =
-  JSON.parse(localStorage.getItem("top1shop_orders") || "[]");
-
-
-/* =========================
-   HELPERS
-========================= */
-
-function money(number){
-
-  return Number(number).toLocaleString("en-US");
-
-}
-
-
-function updateBalance(){
-
-  document.getElementById("balance").textContent =
-    money(balance);
-
-  document.getElementById("miniBalance").textContent =
-    money(balance);
-
-  localStorage.setItem(
-    "top1shop_balance",
-    balance
-  );
-
-}
-
-
-/* =========================
-   RENDER PACKAGES
-========================= */
-
-function renderPackages(){
-
-  const packageBox =
-    document.getElementById("packages");
-
-  packageBox.innerHTML =
-    diamondPackages.map((item,index)=>`
-
-      <div
-        class="package-card
-        ${selectedPackage &&
-          selectedPackage.type==="diamond" &&
-          selectedPackage.index===index
-          ? "selected"
-          : ""}"
-        onclick="selectPackage('diamond',${index})"
-      >
-
-        <div class="package-icon">
-          ${item.icon}
-        </div>
-
-        <div class="package-name">
-          ${item.name}
-        </div>
-
-        <div class="package-price">
-          ৳${item.price}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function renderMemberships(){
-
-  const membershipBox =
-    document.getElementById("memberships");
-
-  membershipBox.innerHTML =
-    memberships.map((item,index)=>`
-
-      <div
-        class="package-card
-        ${selectedPackage &&
-          selectedPackage.type==="membership" &&
-          selectedPackage.index===index
-          ? "selected"
-          : ""}"
-        onclick="selectPackage('membership',${index})"
-      >
-
-        <div class="package-icon">
-          ${item.icon}
-        </div>
-
-        <div class="package-name">
-          ${item.name}
-        </div>
-
-        <div class="package-price">
-          ৳${item.price}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================
-   SELECT PACKAGE
-========================= */
-
-function selectPackage(type,index){
-
-  selectedPackage = {
-    type:type,
-    index:index
-  };
-
-  let item;
-
-  if(type==="diamond"){
-    item = diamondPackages[index];
-  }else{
-    item = memberships[index];
-  }
-
-  updateSummary();
-
-  renderPackages();
-  renderMemberships();
-
-}
-
-
-function updateSummary(){
-
-  const box =
-    document.getElementById("summaryContent");
-
-  if(!selectedPackage){
-
-    box.innerHTML =
-      "কোনো Package Select করা হয়নি।";
-
-    return;
-  }
-
-  let item;
-
-  if(selectedPackage.type==="diamond"){
-
-    item =
-      diamondPackages[selectedPackage.index];
-
-  }else{
-
-    item =
-      memberships[selectedPackage.index];
-
-  }
-
-  const uid =
-    document.getElementById("uid").value.trim();
-
-  box.innerHTML = `
-
-    <b>${item.icon} ${item.name}</b>
-
-    <br>
-
-    Price:
-    <b>৳${item.price}</b>
-
-    <br>
-
-    ${
-      uid
-      ? "UID: "+uid
-      : "UID এখনো দেওয়া হয়নি।"
-    }
-
-  `;
-
-}
-
-
-/* =========================
-   UID CHECK
-========================= */
-
-async function checkName(){
-
-  const uid =
-    document.getElementById("uid").value.trim();
-
-  const result =
-    document.getElementById("result");
-
-  result.style.display="block";
-
-  result.style.background="#fff4e5";
-  result.style.color="#8a5200";
-
-  result.textContent =
-    "🔍 Checking...";
-
-
-  if(!/^\d{6,15}$/.test(uid)){
-
-    result.textContent =
-      "❌ সঠিক UID লিখুন।";
-
-    return;
-  }
-
-
-  try{
-
-    const response =
-      await fetch(
-        "/api/check-name?uid="+
-        encodeURIComponent(uid),
-        {
-          headers:{
-            "Accept":"application/json"
-          }
-        }
-      );
-
-
-    const data =
-      await response.json().catch(
-        ()=>({})
-      );
-
-
-    if(!response.ok){
-
-      result.textContent =
-        "❌ "+
-        (
-          data.error ||
-          "Game Name পাওয়া যায়নি।"
-        );
-
-      return;
-    }
-
-
-    result.style.background="#ecfdf3";
-    result.style.color="#13753d";
-
-    result.textContent =
-      "✅ Game Name: "+
-      data.name;
-
-
-    updateSummary();
-
-
-  }catch(error){
-
-    result.textContent =
-      "❌ Server connection error। আবার চেষ্টা করুন।";
-
-  }
-
-}
-
-
-/* =========================
-   ORDER
-========================= */
-
-function placeOrder(){
-
-  if(!selectedPackage){
-
-    alert(
-      "প্রথমে একটি Diamond বা Membership Select করুন।"
-    );
-
-    return;
-  }
-
-
-  const uid =
-    document.getElementById("uid").value.trim();
-
-
-  if(!/^\d{6,15}$/.test(uid)){
-
-    alert(
-      "প্রথমে সঠিক Free Fire UID দিন।"
-    );
-
-    return;
-  }
-
-
-  let item;
-
-  if(selectedPackage.type==="diamond"){
-
-    item =
-      diamondPackages[selectedPackage.index];
-
-  }else{
-
-    item =
-      memberships[selectedPackage.index];
-
-  }
-
-
-  document.getElementById("paymentText").innerHTML =
-    `
-    <b>${item.icon} ${item.name}</b>
-    <br>
-    UID: ${uid}
-    <br>
-    Amount: <b>৳${item.price}</b>
-    `;
-
-
-  document.getElementById("paymentModal")
-    .style.display="flex";
-
-}
-
-
-/* =========================
-   PAYMENT
-========================= */
-
-function selectPayment(element,method){
-
-  selectedPayment = method;
-
-  document
-    .querySelectorAll(".payment-option")
-    .forEach(
-      el=>el.classList.remove("active")
-    );
-
-  element.classList.add("active");
-
-}
-
-
-function demoVerifyPayment(){
-
-  const txid =
-    document.getElementById("transactionId")
-      .value.trim();
-
-
-  if(!txid){
-
-    alert(
-      "Transaction ID লিখুন।"
-    );
-
-    return;
-  }
-
-
-  alert(
-    "Demo mode: Payment verification এখনো আসল payment gateway-এর সাথে যুক্ত হয়নি।"
-  );
-
-}
-
-
-/* =========================
-   ADD MONEY
-========================= */
-
-function openAddMoney(){
-
-  document.getElementById("moneyModal")
-    .style.display="flex";
-
-}
-
-
-function demoAddMoney(){
-
-  const amount =
-    Number(
-      document.getElementById("moneyAmount")
-        .value
-    );
-
-
-  if(!amount || amount<=0){
-
-    alert(
-      "সঠিক Amount লিখুন।"
-    );
-
-    return;
-  }
-
-
-  alert(
-    "Demo mode: আসল payment gateway যুক্ত না হওয়া পর্যন্ত Wallet-এ টাকা যোগ করা হবে না।"
-  );
-
-}
-
-
-/* =========================
-   LOGIN
-========================= */
-
-function openLogin(){
-
-  document.getElementById("loginModal")
-    .style.display="flex";
-
-}
-
-
-function demoLogin(){
-
-  alert(
-    "Login system এখন Demo mode-এ আছে।"
-  );
-
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-function closeModal(id){
-
-  document.getElementById(id)
-    .style.display="none";
-
-}
-
-
-window.onclick=function(event){
-
-  if(event.target.classList.contains("modal")){
-
-    event.target.style.display="none";
-
-  }
-
-};
-
-
-/* =========================
-   ORDERS
-========================= */
-
-function renderOrders(){
-
-  const box =
-    document.getElementById("orders");
-
-
-  if(!orders.length){
-
-    box.innerHTML =
-      `
-      <div class="empty-order">
-        এখনো কোনো Order নেই।
-      </div>
-      `;
-
-    return;
-  }
-
-
-  box.innerHTML =
-    orders.map(order=>`
-
-      <div
-        style="
-        border:1px solid #ddd;
-        border-radius:18px;
-        padding:16px;
-        margin-bottom:12px;
-        "
-      >
-
-        <b>${order.name}</b>
-
-        <br>
-
-        UID:
-        ${order.uid}
-
-        <br>
-
-        Amount:
-        ৳${order.price}
-
-        <br>
-
-        Status:
-        ${order.status}
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function scrollToTop(){
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function scrollToOrders(){
-
-  document
-    .querySelector(".order-box")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-}
-
-
-function scrollToSupport(){
-
-  document
-    .querySelector(".support")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-}
-
-
-/* =========================
-   START
-========================= */
-
-renderPackages();
-renderMemberships();
-renderOrders();
-updateBalance();
-
-</script>
-
-</body>
-  </html>
+.support-card p{
+  color:#9299a5;
