@@ -4,584 +4,196 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TOP1 SHOP</title>
-
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-:root{
-  --blue:#1768e8;
-  --blue2:#123b8d;
-  --red:#ef2939;
-  --bg:#f5f7fb;
-  --text:#182033;
-  --muted:#8a92a1;
-  --white:#fff;
-  --border:#e3e6ec;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  padding-bottom:100px;
-}
-
-button{
-  font-family:inherit;
-  cursor:pointer;
-}
-
-input{
-  font-family:inherit;
-}
-
-/* ================= HEADER ================= */
-
-.header{
-  height:76px;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 22px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 15px rgba(0,0,0,.06);
-}
-
-.logo{
-  font-size:31px;
-  font-weight:900;
-  font-style:italic;
-  letter-spacing:-2px;
-}
-
-.logo-blue{
-  color:var(--blue);
-}
-
-.logo-red{
-  color:var(--red);
-}
-
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-
-.cart-btn{
-  border:0;
-  background:transparent;
-  font-size:27px;
-}
-
-.login-btn{
-  border:0;
-  background:var(--blue);
-  color:#fff;
-  padding:14px 20px;
-  border-radius:16px;
-  font-size:16px;
-  font-weight:bold;
-}
-
-/* ================= CONTAINER ================= */
-
-.container{
-  width:min(900px,94%);
-  margin:auto;
-}
-
-/* ================= PAGES ================= */
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-/* ================= HOME HERO ================= */
-
-.hero{
-  margin-top:20px;
-  min-height:245px;
-  border-radius:32px;
-  overflow:hidden;
-  position:relative;
-  background:linear-gradient(135deg,#eef4ff,#dce9ff);
-  padding:32px;
-  display:flex;
-  align-items:center;
-}
-
-.hero-text{
-  width:63%;
-  position:relative;
-  z-index:2;
-}
-
-.hero-text h1{
-  color:var(--blue);
-  font-size:34px;
-  line-height:1.15;
-}
-
-.hero-text h1 span{
-  color:var(--red);
-}
-
-.hero-text p{
-  margin-top:14px;
-  color:#4b5870;
-  font-size:17px;
-  line-height:1.5;
-}
-
-.hero-character{
-  position:absolute;
-  right:10px;
-  bottom:0;
-  width:39%;
-  height:90%;
-  display:flex;
-  justify-content:center;
-  align-items:end;
-}
-
-.character{
-  width:145px;
-  height:170px;
-  border-radius:75px 75px 22px 22px;
-  background:linear-gradient(145deg,#1596ff,#173d9d);
-  position:relative;
-  box-shadow:0 15px 35px rgba(20,65,160,.3);
-}
-
-.character:before{
-  content:"";
-  position:absolute;
-  width:76px;
-  height:76px;
-  border-radius:50%;
-  background:#ffd7bc;
-  left:35px;
-  top:-42px;
-}
-
-.character:after{
-  content:"";
-  position:absolute;
-  width:90px;
-  height:34px;
-  border-radius:50% 50% 20% 20%;
-  background:#12d4ff;
-  left:28px;
-  top:-49px;
-  transform:rotate(-8deg);
-}
-
-/* ================= DOTS ================= */
-
-.dots{
-  text-align:center;
-  margin:10px 0 16px;
-}
-
-.dot{
-  display:inline-block;
-  width:10px;
-  height:10px;
-  background:#c7ccd5;
-  border-radius:50%;
-  margin:3px;
-}
-
-.dot.active{
-  background:var(--blue);
-}
-
-/* ================= QUICK ================= */
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.quick{
-  background:#fff;
-  border-radius:20px;
-  padding:16px 8px;
-  text-align:center;
-  box-shadow:0 4px 15px rgba(0,0,0,.06);
-}
-
-.quick-icon{
-  font-size:27px;
-}
-
-.quick small{
-  display:block;
-  color:#a0a6b0;
-  margin-top:4px;
-}
-
-.quick b{
-  font-size:14px;
-}
-
-/* ================= SPIN ================= */
-
-.spin{
-  margin-top:22px;
-  background:#fff8df;
-  border:1px solid #f2df9f;
-  border-radius:23px;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.spin-icon{
-  width:62px;
-  height:62px;
-  border-radius:19px;
-  background:#ff9b00;
-  color:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:30px;
-}
-
-.spin-text small{
-  color:#e06d18;
-  font-weight:bold;
-}
-
-.spin-text b{
-  display:block;
-  margin-top:5px;
-  font-size:16px;
-}
-
-/* ================= SECTION ================= */
-
-.section{
-  margin-top:35px;
-}
-
-.section-title{
-  font-size:27px;
-  text-align:center;
-  margin-bottom:19px;
-}
-
-/* ================= UID ================= */
-
-.uid-card{
-  background:#fff;
-  border-radius:25px;
-  padding:23px;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
-}
-
-.uid-card label{
-  display:block;
-  font-size:19px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.uid-card input,
-.form-input{
-  width:100%;
-  padding:17px;
-  border:1px solid #dfe2e8;
-  border-radius:16px;
-  font-size:18px;
-  outline:none;
-}
-
-.uid-card input:focus,
-.form-input:focus{
-  border-color:var(--blue);
-}
-
-.check-btn{
-  width:100%;
-  border:0;
-  background:#182033;
-  color:#fff;
-  padding:17px;
-  border-radius:16px;
-  margin-top:12px;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.result{
-  display:none;
-  margin-top:12px;
-  padding:13px;
-  border-radius:13px;
-  font-weight:bold;
-}
-
-/* ================= PRODUCTS ================= */
-
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.product{
-  background:#fff;
-  border:2px solid transparent;
-  border-radius:21px;
-  padding:20px 10px;
-  text-align:center;
-  box-shadow:0 5px 18px rgba(0,0,0,.06);
-  transition:.15s;
-}
-
-.product:active{
-  transform:scale(.97);
-}
-
-.product.selected{
-  border-color:var(--blue);
-  background:#edf5ff;
-}
-
-.product-icon{
-  font-size:38px;
-}
-
-.product-name{
-  min-height:42px;
-  margin-top:7px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:16px;
-  font-weight:bold;
-}
-
-.product-price{
-  margin-top:8px;
-  color:var(--blue);
-  font-size:23px;
-  font-weight:900;
-}
-
-/* ================= SUMMARY ================= */
-
-.summary{
-  background:#fff;
-  border-radius:25px;
-  padding:23px;
-  margin-top:22px;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
-}
-
-.summary h3{
-  margin-bottom:13px;
-}
-
-.summary-info{
-  line-height:1.8;
-  color:#424b5d;
-}
-
-.order-btn,
-.primary-btn{
-  width:100%;
-  border:0;
-  background:var(--blue);
-  color:#fff;
-  padding:17px;
-  border-radius:17px;
-  margin-top:15px;
-  font-size:18px;
-  font-weight:bold;
-}
-
-/* ================= BLUE HERO PAGES ================= */
-
-.page-hero{
-  margin-top:20px;
-  background:linear-gradient(135deg,#2c57ae,#12357e);
-  color:#fff;
-  border-radius:32px;
-  padding:34px;
-  box-shadow:0 15px 35px rgba(20,65,150,.2);
-}
-
-.page-badge{
-  display:inline-block;
-  background:rgba(255,255,255,.13);
-  padding:10px 15px;
-  border-radius:20px;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-
-.page-hero h1{
-  font-size:34px;
-  margin-top:18px;
-}
-
-.page-hero p{
-  margin-top:12px;
-  color:#dce7ff;
-  font-size:17px;
-  line-height:1.6;
-}
-
-/* ================= ORDERS ================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:22px;
-}
-
-.stat{
-  background:rgba(255,255,255,.1);
-  padding:17px;
-  border-radius:20px;
-  text-align:center;
-}
-
-.stat small{
-  color:#dce7ff;
-}
-
-.stat b{
-  display:block;
-  font-size:24px;
-  margin-top:4px;
-}
-
-.order-search{
-  background:#fff;
-  margin-top:22px;
-  padding:22px;
-  border-radius:25px;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
-}
-
-.order-search h3{
-  margin-bottom:14px;
-}
-
-.order-item{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:17px;
-  margin-top:12px;
-}
-
-.empty{
-  text-align:center;
-  padding:30px 10px;
-  color:var(--muted);
-}
-
-/* ================= ADD MONEY ================= */
-
-.money-card{
-  background:#fff;
-  border-radius:25px;
-  padding:24px;
-  margin-top:22px;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
-}
-
-.balance-big{
-  background:linear-gradient(135deg,#2453ad,#1769e8);
-  color:#fff;
-  border-radius:22px;
-  padding:23px;
-}
-
-.balance-big small{
-  color:#dce7ff;
-}
-
-.balance-big b{
-  display:block;
-  font-size:34px;
-  margin-top:5px;
-}
-
-.payment-title{
-  margin:23px 0 12px;
-  font-size:19px;
-  font-weight:bold;
-}
-
-.payment-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.payment{
-  border:2px solid var(--border);
-  padding:18px;
-  border-radius:17px;
-  text-align:center;
-  font-weight:bold;
-}
-
-.payment.active{
-  border-color:var(--blue);
-  background:#edf5ff;
-}
-
-/* ================= SUPPORT ================= */
-
-.support-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-top:22px;
-}
-
-.support-card{
-  background:#fff;
-  border-radius:24px;
-  padding:23px;
-  min-height:205px;
-  box-shadow:0 5px 18px rgba(0,0,0,.06);
-}
-
-.support-icon{
-  font-size:42px;
-}
-
-.support-card h3{
-  margin-top:15px;
-  font-size:20px;
-}
-
-.support-card p{
-  color:#9299a5;
+*{box-sizing:border-box}
+body{margin:0;background:#071225;color:#fff;font-family:Arial,sans-serif;padding-bottom:75px}
+header{padding:16px;background:#0d1d38;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.logo{font-size:22px;font-weight:bold}.logo span{color:#35d9ff}
+button,input{font:inherit}
+button{cursor:pointer;border:0;border-radius:10px;padding:12px}
+.wrap{max-width:700px;margin:auto;padding:14px}
+.hero{padding:22px;border-radius:18px;background:linear-gradient(135deg,#164b9c,#10213f)}
+.hero h1{font-size:29px}.muted{color:#a8b8d3;font-size:13px}
+.section{margin-top:22px}
+.section h2{font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.pkg,.card{background:#122343;border:1px solid #2a4268;border-radius:13px;padding:14px}
+.pkg{text-align:left;color:white}
+.pkg.selected{border:2px solid #35d9ff}
+.pkg b{display:block;margin:8px 0}
+.price{font-size:19px;color:#75e8ff;font-weight:bold}
+input{width:100%;padding:13px;background:#07152c;color:white;border:1px solid #2a4268;border-radius:10px;margin:6px 0}
+.primary{width:100%;background:#29bfff;color:#06152d;font-weight:bold;margin-top:8px}
+.green{background:#28d99a;color:#06251e}
+.result{margin-top:10px;padding:10px;background:#091a30;border-radius:9px;overflow-wrap:anywhere}
+.page{display:none}.page.active{display:block}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0d1d38;display:grid;grid-template-columns:repeat(5,1fr);padding:6px 0}
+.bottom button{background:transparent;color:#a8b8d3;font-size:11px;padding:8px 2px}
+.bottom button.active{color:#35d9ff;font-weight:bold}
+.row{padding:12px 0;border-bottom:1px solid #2a4268}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">TOP1 <span>SHOP</span></div>
+  <div>💰 ৳<b id="balanceTop">0</b></div>
+</header>
+
+<main class="wrap">
+<section class="page active" id="home">
+  <div class="hero">
+    <p>FAST • SIMPLE • TOP1 SHOP</p>
+    <h1>FREE FIRE<br>DIAMOND TOP UP 💎</h1>
+    <p>প্যাকেজ বেছে নাও, UID চেক করো, অর্ডার দাও।</p>
+  </div>
+
+  <div class="section">
+    <h2>💎 Diamond Packages</h2>
+    <div class="grid" id="diamonds"></div>
+  </div>
+
+  <div class="section">
+    <h2>🔥 Membership Packages</h2>
+    <div class="grid" id="memberships"></div>
+  </div>
+
+  <div class="section card">
+    <h2>🎮 Player Information</h2>
+    <label for="uid">Free Fire UID</label>
+    <input id="uid" inputmode="numeric" placeholder="তোমার UID লিখুন">
+    <button class="primary" onclick="checkName()">🔍 CHECK NAME</button>
+    <div id="nameResult" class="result" style="display:none"></div>
+  </div>
+
+  <div class="section card">
+    <h2>🧾 Order Summary</h2>
+    <div id="summary" class="muted">একটি প্যাকেজ বেছে নাও।</div>
+    <button class="primary green" onclick="startOrder()">CONTINUE TO PAYMENT</button>
+    <p class="muted">Payment এখন Demo; আসল পেমেন্ট বা Diamond delivery চালু নেই।</p>
+  </div>
+</section>
+
+<section class="page" id="orders">
+  <div class="hero"><h1>My Orders 🧾</h1><p>তোমার Demo Order History</p></div>
+  <div class="card section" id="orderList">এখনও কোনো অর্ডার নেই।</div>
+</section>
+
+<section class="page" id="add">
+  <div class="hero"><h1>Add Money 💰</h1><p>Demo Wallet</p></div>
+  <div class="card section">
+    <h2>Wallet Balance: ৳<span id="walletBalance">0</span></h2>
+    <label for="amount">Amount (৳)</label>
+    <input id="amount" type="number" min="1" placeholder="টাকার পরিমাণ">
+    <button class="primary" onclick="addDemoMoney()">ADD MONEY (DEMO)</button>
+    <p class="muted">এটি Demo balance, আসল টাকা নয়।</p>
+  </div>
+</section>
+
+<section class="page" id="support">
+  <div class="hero"><h1>Support Center 🆘</h1><p>TOP1 SHOP Help</p></div>
+  <div class="card section">
+    <div class="row">💬 Contact Support</div>
+    <div class="row">🧾 Order Help</div>
+    <p class="muted">Official WhatsApp/Telegram link এখনও যোগ করা হয়নি।</p>
+  </div>
+</section>
+
+<section class="page" id="profile">
+  <div class="hero"><h1>Profile 👤</h1><p>Guest User</p></div>
+  <div class="card section">
+    <div class="row">Wallet: ৳<span id="profileBalance">0</span></div>
+    <div class="row">Orders: <span id="profileOrders">0</span></div>
+  </div>
+</section>
+</main>
+
+<nav class="bottom">
+  <button class="active" onclick="showPage('home',this)">⌂<br>Home</button>
+  <button onclick="showPage('orders',this)">🧾<br>Orders</button>
+  <button onclick="showPage('add',this)">💰<br>Add Money</button>
+  <button onclick="showPage('support',this)">🆘<br>Support</button>
+  <button onclick="showPage('profile',this)">👤<br>Profile</button>
+</nav>
+
+<script>
+const diamonds=[
+ {name:"25 Diamonds",price:20},
+ {name:"50 Diamonds",price:35},
+ {name:"115 Diamonds",price:78},
+ {name:"240 Diamonds",price:155},
+ {name:"610 Diamonds",price:395},
+ {name:"1240 Diamonds",price:795}
+];
+const memberships=[
+ {name:"Weekly Membership",price:152},
+ {name:"Monthly Membership",price:760},
+ {name:"Weekly Lite",price:40}
+];
+let selected=null,playerName="",balance=0,orders=[];
+const $=id=>document.getElementById(id);
+function renderPackages(){
+ $("diamonds").innerHTML=diamonds.map((p,i)=>`
+ <button class="pkg ${selected&&selected.name===p.name?'selected':''}" onclick="choosePackage('d',${i})">
+ 💎<b>${p.name}</b><span class="price">৳${p.price}</span></button>`).join("");
+ $("memberships").innerHTML=memberships.map((p,i)=>`
+ <button class="pkg ${selected&&selected.name===p.name?'selected':''}" onclick="choosePackage('m',${i})">
+ ⭐<b>${p.name}</b><span class="price">৳${p.price}</span></button>`).join("");
+}
+function choosePackage(type,i){
+ selected=(type==="d"?diamonds:memberships)[i];
+ renderPackages();updateSummary();
+}
+function updateSummary(){
+ $("summary").innerHTML=selected?
+ `<b>${selected.name}</b> — ৳${selected.price}<br>UID: ${$("uid").value||"এখনও দেওয়া হয়নি"}<br>Player: ${playerName||"UID চেক করা হয়নি"}`:
+ "একটি প্যাকেজ বেছে নাও।";
+}
+async function checkName(){
+ const uid=$("uid").value.trim(),out=$("nameResult");
+ out.style.display="block";out.textContent="🔍 Checking...";
+ playerName="";
+ if(!/^\d{6,15}$/.test(uid)){out.textContent="❌ সঠিক UID লিখুন।";return}
+ try{
+  const r=await fetch("/api/check-name?uid="+encodeURIComponent(uid));
+  const d=await r.json();
+  if(!r.ok)throw Error(d.error||"Game Name পাওয়া যায়নি");
+  playerName=d.name||"";
+  out.textContent="✅ Game Name: "+playerName;
+ }catch(e){
+  out.textContent="❌ UID API সংযোগ হচ্ছে না। API backend deploy পরীক্ষা করুন।";
+ }
+ updateSummary();
+}
+function startOrder(){
+ if(!selected){alert("আগে একটি Package বেছে নাও।");return}
+ const uid=$("uid").value.trim();
+ if(!/^\d{6,15}$/.test(uid)){alert("সঠিক Free Fire UID লিখুন।");return}
+ if(!confirm(selected.name+" — ৳"+selected.price+" দিয়ে Demo Order তৈরি করবেন?"))return;
+ orders.unshift({name:selected.name,price:selected.price,uid,date:new Date().toLocaleString()});
+ $("orderList").innerHTML=orders.map(o=>`<div class="row"><b>${o.name}</b> — ৳${o.price}<br>UID: ${o.uid}<br><small>${o.date}</small><br><small>Demo / Pending</small></div>`).join("");
+ $("profileOrders").textContent=orders.length;
+ showPage("orders",document.querySelectorAll(".bottom button")[1]);
+ alert("Demo Order তৈরি হয়েছে। Payment verified হয়নি এবং Diamond পাঠানো হয়নি।");
+}
+function addDemoMoney(){
+ let a=Number($("amount").value);
+ if(!Number.isFinite(a)||a<1||a>10000){alert("৳১ থেকে ৳১০,০০০ দিন।");return}
+ if(!confirm("শুধু Demo balance যোগ হবে। চালিয়ে যাবেন?"))return;
+ balance+=a;updateBalance();$("amount").value="";
+}
+function updateBalance(){
+ $("balanceTop").textContent=balance;
+ $("walletBalance").textContent=balance;
+ $("profileBalance").textContent=balance;
+}
+function showPage(id,btn){
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
+ document.querySelectorAll(".bottom button").forEach(b=>b.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+ window.scrollTo(0,0);
+}
+$("uid").addEventListener("input",updateSummary);
+renderPackages();updateSummary();updateBalance();
+</script>
+</body>
+</html>
