@@ -26,6 +26,12 @@ button{cursor:pointer}
 .pkg.selected{border-color:var(--blue);background:#eff5ff;box-shadow:0 0 0 1px #245fe822}
 .pkg-top{display:flex;gap:8px;align-items:center}.pkg-icon{font-size:22px}.pkg-name{font-size:14px;font-weight:850;line-height:1.3}.pkg-price{font-size:16px;color:#2058d9;font-weight:950;margin:9px 0 0 30px}
 .membership-list{display:grid;grid-template-columns:1fr;gap:9px}
+.category-box{margin:12px 0;border:1px solid #e5eaf4;border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 4px 14px #1b2d4d09}
+.category-toggle{width:100%;display:flex;align-items:center;gap:12px;padding:16px;border:0;background:linear-gradient(120deg,#fff,#f3f7ff);text-align:left;color:var(--ink)}
+.category-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:#e6efff;font-size:25px;flex-shrink:0}
+.category-copy{flex:1}.category-name{font-weight:950;font-size:17px}.category-sub{font-size:12px;color:var(--muted);margin-top:4px}.category-arrow{font-size:20px;color:var(--blue);font-weight:900}
+.category-content{display:none;padding:12px;border-top:1px solid #edf0f6}.category-box.open .category-content{display:block}.category-box.open .category-arrow{transform:rotate(180deg)}
+.member-single{display:flex;align-items:center;gap:12px;width:100%;padding:13px;border:1.5px solid #e7ebf4;border-radius:14px;background:#fff;text-align:left}.member-single.selected{border-color:var(--blue);background:#eff5ff}.member-single .member-price{margin-left:auto}
 .member{display:flex;align-items:center;gap:12px;width:100%;border:1.5px solid #e7ebf4;border-radius:16px;background:#fff;padding:13px;text-align:left}
 .member.selected{border-color:var(--blue);background:#eff5ff}
 .member-icon{width:43px;height:43px;flex:0 0 43px;display:grid;place-items:center;background:#eaf1ff;border-radius:13px;font-size:23px}
@@ -64,14 +70,22 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
   </div>
   <div class="dots"><span class="dot active"></span><span class="dot"></span></div>
 
-  <h2 class="section-title">💎 UID TOPUP</h2>
-  <section class="panel">
-    <div class="pack-grid" id="diamonds"></div>
+  <h2 class="section-title">🎮 SELECT TOP UP</h2>
+  <section class="category-box" id="diamondBox">
+    <button class="category-toggle" onclick="toggleBox('diamondBox')"><span class="category-icon">💎</span><span class="category-copy"><span class="category-name">UID TOPUP</span><span class="category-sub">সব Diamond Package দেখতে এখানে Tap করো</span></span><span class="category-arrow">⌄</span></button>
+    <div class="category-content"><div class="pack-grid" id="diamonds"></div></div>
   </section>
-
-  <h2 class="section-title">🔥 WEEKLY + MONTHLY</h2>
-  <section class="panel">
-    <div class="membership-list" id="memberships"></div>
+  <section class="category-box" id="weeklyBox">
+    <button class="category-toggle" onclick="toggleBox('weeklyBox')"><span class="category-icon">🔥</span><span class="category-copy"><span class="category-name">WEEKLY</span><span class="category-sub">Weekly Membership</span></span><span class="category-arrow">⌄</span></button>
+    <div class="category-content" id="weeklyContent"></div>
+  </section>
+  <section class="category-box" id="monthlyBox">
+    <button class="category-toggle" onclick="toggleBox('monthlyBox')"><span class="category-icon">👑</span><span class="category-copy"><span class="category-name">MONTHLY</span><span class="category-sub">Monthly Membership</span></span><span class="category-arrow">⌄</span></button>
+    <div class="category-content" id="monthlyContent"></div>
+  </section>
+  <section class="category-box" id="weeklyLiteBox">
+    <button class="category-toggle" onclick="toggleBox('weeklyLiteBox')"><span class="category-icon">⭐</span><span class="category-copy"><span class="category-name">WEEKLY LITE</span><span class="category-sub">Weekly Lite Membership</span></span><span class="category-arrow">⌄</span></button>
+    <div class="category-content" id="weeklyLiteContent"></div>
   </section>
 
   <section class="panel" style="margin-top:14px">
@@ -157,16 +171,17 @@ const $ = id => document.getElementById(id);
 const money = n => Number(n).toLocaleString("en-US");
 const allPackages = [...DIAMONDS.map(p=>({...p,icon:"💎",type:"diamond"})),...MEMBERSHIPS.map(p=>({...p,type:"membership"}))];
 
+function toggleBox(id){$(id).classList.toggle("open")}
 function renderPackages(){
   $("diamonds").innerHTML = DIAMONDS.map((p,i)=>`
     <button class="pkg ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('diamond',${i})">
       <div class="pkg-top"><span class="pkg-icon">💎</span><span class="pkg-name">${p.name}</span></div>
       <div class="pkg-price">৳${p.price} TK</div>
     </button>`).join("");
-  $("memberships").innerHTML = MEMBERSHIPS.map((p,i)=>`
-    <button class="member ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('membership',${i})">
-      <span class="member-icon">${p.icon}</span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-sub">${p.sub}</span></span><span class="member-price">৳${p.price}</span>
-    </button>`).join("");
+  const memberTargets = ["weeklyContent","monthlyContent","weeklyLiteContent"];
+  MEMBERSHIPS.forEach((p,i)=>{
+    $(memberTargets[i]).innerHTML = `<button class="member-single ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('membership',${i})"><span class="member-icon">${p.icon}</span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-sub">${p.sub}</span></span><span class="member-price">৳${p.price}</span></button>`;
+  });
   $("bal").textContent=money(balance);$("mini").textContent=money(balance);
 }
 function choosePackage(type,i){
@@ -227,4 +242,4 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;","
 renderPackages();
 </script>
 </body>
-  </html>
+                                                     </html>
