@@ -1,300 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<title>TOP1 SHOP</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TOP1 SHOP — Free Fire Top Up</title>
 <style>
+:root{--blue:#245fe8;--navy:#10265b;--ink:#20283a;--muted:#778196;--bg:#f5f7fb;--line:#e7ebf3}
 *{box-sizing:border-box}
-:root{--blue:#2861df;--text:#202b3c;--muted:#8994a6;--line:#e8edf5}
-body{margin:0;background:#f5f7fb;color:var(--text);font-family:Arial,sans-serif;padding-bottom:85px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans Bengali",sans-serif;padding-bottom:88px}
 button,input{font:inherit}
 button{cursor:pointer}
-header{height:68px;background:#fff;position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid var(--line)}
-.logo{font-size:23px;font-weight:900;color:#172b54}.logo span{color:var(--blue)}
-.balance{background:var(--blue);color:white;padding:10px 13px;border-radius:25px;font-weight:bold}
-.wrap{max-width:720px;margin:auto;padding:14px}
-.page{display:none}.page.active{display:block}
-.banner{position:relative;overflow:hidden;border-radius:19px;padding:22px;color:#fff;background:linear-gradient(125deg,#1645ac,#168de9);min-height:190px}
-.banner small{letter-spacing:1.5px;font-weight:bold}
-.banner h1{font-size:28px;line-height:1.2;margin:18px 0 8px;max-width:300px}
-.banner p{font-size:13px;line-height:1.6;max-width:280px}
-.banner .gem{position:absolute;right:14px;bottom:14px;font-size:65px}
-.dots{text-align:center;padding:12px;color:var(--blue)}
-.section{margin-top:20px}
-.section-title{font-size:19px;font-weight:800;margin:0 0 12px}
-.bigbox{background:white;border:1px solid var(--line);border-radius:17px;padding:14px;box-shadow:0 5px 18px #1c37620a}
-.box-heading{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}
-.box-heading .symbol{background:#eaf2ff;color:var(--blue);border-radius:11px;width:42px;height:42px;display:grid;place-items:center;font-size:24px}
-.box-heading h2{font-size:18px;margin:0}
-.box-heading p{font-size:11px;color:var(--muted);margin:4px 0 0}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.pkg{border:1px solid #e3e9f3;border-radius:13px;padding:12px 10px;background:#fff;color:var(--text);text-align:left;min-width:0}
-.pkg.selected{border:2px solid var(--blue);background:#f1f6ff;padding:11px 9px}
-.pkg .icon{font-size:24px}
-.pkg b{display:block;font-size:14px;margin:8px 0}
-.price{color:var(--blue);font-weight:900;font-size:19px}
-.membership-box{border-color:#f0dfb7}
-.membership-box .box-heading .symbol{background:#fff4d9;color:#a7780c}
-.membership-box .pkg.selected{border-color:#c7962b;background:#fffaf0}
-.membership-box .price{color:#a7780c}
-input{display:block;width:100%;padding:13px;border:1px solid #dce4f0;background:white;border-radius:11px;margin:8px 0;color:var(--text);outline-color:var(--blue)}
-label{font-size:13px;font-weight:bold}
-.primary{border:0;border-radius:11px;background:var(--blue);color:white;font-weight:bold;padding:14px;width:100%;margin-top:9px}
-.secondary{border:1px solid #dbe5f5;border-radius:11px;background:#eff5ff;color:var(--blue);font-weight:bold;padding:12px;width:100%;margin-top:8px}
-.muted{font-size:12px;color:var(--muted);line-height:1.6}
-.result{background:#eff6ff;border-radius:10px;padding:12px;margin-top:10px;font-size:14px;overflow-wrap:anywhere}
-.summary-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
-.info{background:#eef5ff;border-radius:10px;padding:11px;font-size:12px;line-height:1.6;color:#36527c;margin-top:12px}
-.row{padding:13px 0;border-bottom:1px solid var(--line);line-height:1.7}
-.bottom{position:fixed;bottom:0;left:0;right:0;z-index:10;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-top:1px solid var(--line);padding:8px 2px max(8px,env(safe-area-inset-bottom));box-shadow:0 -4px 20px #172b540b}
-.bottom button{border:0;background:transparent;color:#929bad;font-size:11px;font-weight:bold;padding:5px 0}
-.bottom button .navicon{display:block;font-size:21px;margin-bottom:4px}
-.bottom button.active{color:var(--blue)}
-.empty{text-align:center;padding:24px 8px;color:var(--muted);font-size:14px}
-@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.banner h1{font-size:34px}}
+.header{height:72px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 15px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #15254b12}
+.logo{font-size:26px;font-weight:950;color:#1758dc;font-style:italic;letter-spacing:-1px}.logo span{color:#f12e43}
+.actions{display:flex;gap:8px;align-items:center}.mini{background:#eef4ff;color:#1856d9;padding:10px 12px;border-radius:14px;font-weight:900}
+.login,.primary,.check{border:0;border-radius:13px;padding:12px 15px;background:var(--blue);color:white;font-weight:900}
+.container{max-width:900px;margin:auto;padding:0 14px 28px}
+.banner-wrap{margin:16px 0 8px;border-radius:22px;overflow:hidden;background:#dceaff;box-shadow:0 7px 22px #142e6415;position:relative}
+.banner{display:block;width:100%;aspect-ratio:2.25/1;object-fit:cover}
+.dots{display:flex;justify-content:center;gap:9px;padding:12px 0 2px}.dot{width:9px;height:9px;border-radius:50%;background:#c7cbd4}.dot.active{background:var(--blue)}
+.section-title{text-align:center;font-size:22px;margin:26px 0 13px;font-weight:950;letter-spacing:.2px}
+.panel{background:#fff;border:1px solid #edf0f6;border-radius:22px;padding:15px;box-shadow:0 5px 18px #1b2d4d0b}
+.pack-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pkg{min-width:0;border:1.5px solid #e7ebf4;border-radius:16px;background:#fff;padding:14px 10px;text-align:left;box-shadow:0 2px 6px #172b4d06}
+.pkg.selected{border-color:var(--blue);background:#eff5ff;box-shadow:0 0 0 1px #245fe822}
+.pkg-top{display:flex;gap:8px;align-items:center}.pkg-icon{font-size:22px}.pkg-name{font-size:14px;font-weight:850;line-height:1.3}.pkg-price{font-size:16px;color:#2058d9;font-weight:950;margin:9px 0 0 30px}
+.membership-list{display:grid;grid-template-columns:1fr;gap:9px}
+.member{display:flex;align-items:center;gap:12px;width:100%;border:1.5px solid #e7ebf4;border-radius:16px;background:#fff;padding:13px;text-align:left}
+.member.selected{border-color:var(--blue);background:#eff5ff}
+.member-icon{width:43px;height:43px;flex:0 0 43px;display:grid;place-items:center;background:#eaf1ff;border-radius:13px;font-size:23px}
+.member-info{flex:1}.member-name{font-weight:900}.member-sub{font-size:12px;color:var(--muted);margin-top:3px}.member-price{font-weight:950;color:#2058d9;white-space:nowrap}
+label{display:block;font-weight:850;margin:10px 0 7px}
+input{width:100%;padding:13px;border:1px solid #d9e0ec;border-radius:12px;background:#fff;font-size:16px;outline:none}
+input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
+.check{width:100%;margin-top:9px;background:#17284f}
+.result{display:none;margin-top:9px;padding:11px;border-radius:12px;background:#fff4e5;color:#8a5200;font-weight:800;overflow-wrap:anywhere}
+.wallet{display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(135deg,#102b67,#2869ef);color:#fff}
+.balance{font-size:27px;font-weight:950;margin-top:4px}.add{border:0;border-radius:12px;padding:11px 13px;background:#fff;color:#1457e8;font-weight:900;white-space:nowrap}
+.summary-line{line-height:1.7}.notice{font-size:12px;color:#68748b;line-height:1.55}
+.primary{width:100%;margin-top:12px}
+.order-list .order-row{padding:12px 0;border-bottom:1px solid #edf0f5}.order-list .order-row:last-child{border-bottom:0}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:76px;background:#fff;border-top:1px solid #e7ebf2;display:grid;grid-template-columns:repeat(5,1fr);z-index:12;padding-bottom:env(safe-area-inset-bottom)}
+.nav{border:0;background:none;color:#858da0;font-size:11px;font-weight:800}.nav b{display:block;font-size:21px;margin-bottom:3px}.nav.active{color:var(--blue)}
+.modal{display:none;position:fixed;inset:0;background:#07132988;z-index:30;align-items:flex-end}.modal.show{display:flex}
+.sheet{background:#fff;width:100%;max-width:600px;margin:0 auto;border-radius:24px 24px 0 0;padding:21px;max-height:90vh;overflow:auto}
+.close{float:right;border:0;border-radius:50%;width:35px;height:35px;font-size:22px;background:#f0f3f8}
+.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pay{padding:14px;border:2px solid #e1e6ef;border-radius:13px;text-align:center;font-weight:900}.pay.on{border-color:var(--blue);background:#eff5ff}
+.success{margin-top:12px;background:#ecfdf3;color:#13753d;padding:14px;border-radius:13px;font-weight:800;overflow-wrap:anywhere}
+@media(min-width:650px){.pack-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.membership-list{grid-template-columns:repeat(3,minmax(0,1fr))}.member{align-items:flex-start;flex-direction:column}.member-price{margin-top:auto}.banner{aspect-ratio:2.4/1}}
 </style>
 </head>
 <body>
-<header>
+<header class="header">
   <div class="logo">TOP1 <span>SHOP</span></div>
-  <div class="balance">💰 ৳<span id="balanceTop">0</span></div>
+  <div class="actions"><div class="mini">৳ <span id="mini">0</span></div><button class="login" onclick="openModal('login')">⇥ Login</button></div>
 </header>
 
-<main class="wrap">
-
-<section class="page active" id="home">
-  <div class="banner">
-    <small>WELCOME TO TOP1 SHOP</small>
-    <h1>FREE FIRE<br>DIAMOND TOP UP</h1>
-    <p>তোমার পছন্দের প্যাকেজ বেছে নাও এবং UID চেক করো।</p>
-    <div class="gem">💎</div>
+<main class="container" id="home">
+  <div class="banner-wrap">
+    <!-- Upload your banner image to the same GitHub folder as index.html and name it banner.jpg -->
+    <img class="banner" src="banner.jpg" alt="TOP1 SHOP Free Fire top-up banner" onerror="this.style.display='none';document.getElementById('bannerFallback').style.display='grid'">
+    <div id="bannerFallback" style="display:none;aspect-ratio:2.25/1;place-items:center;text-align:center;padding:20px;color:white;background:linear-gradient(135deg,#102758,#1766ee)"><div><b style="font-size:clamp(25px,6vw,42px)">TOP1 SHOP</b><p>FREE FIRE DIAMOND TOP UP 💎</p></div></div>
   </div>
-  <div class="dots">● ○ ○</div>
+  <div class="dots"><span class="dot active"></span><span class="dot"></span></div>
 
-  <!-- BOX 1: DIAMOND PACKAGES -->
-  <section class="section">
-    <div class="bigbox">
-      <div class="box-heading">
-        <div class="symbol">💎</div>
-        <div>
-          <h2>UID TOPUP</h2>
-          <p>DIAMOND PACKAGES</p>
-        </div>
-      </div>
-      <div class="grid" id="diamonds"></div>
-    </div>
+  <h2 class="section-title">💎 UID TOPUP</h2>
+  <section class="panel">
+    <div class="pack-grid" id="diamonds"></div>
   </section>
 
-  <!-- BOX 2: MEMBERSHIPS -->
-  <section class="section">
-    <div class="bigbox membership-box">
-      <div class="box-heading">
-        <div class="symbol">👑</div>
-        <div>
-          <h2>WEEKLY / MONTHLY</h2>
-          <p>MEMBERSHIP PACKAGES</p>
-        </div>
-      </div>
-      <div class="grid" id="memberships"></div>
-    </div>
+  <h2 class="section-title">🔥 WEEKLY + MONTHLY</h2>
+  <section class="panel">
+    <div class="membership-list" id="memberships"></div>
   </section>
 
-  <section class="section bigbox">
-    <div class="box-heading">
-      <div class="symbol">🎮</div>
-      <div>
-        <h2>Player Information</h2>
-        <p>CHECK YOUR FREE FIRE UID</p>
-      </div>
-    </div>
+  <section class="panel" style="margin-top:14px">
     <label for="uid">Free Fire UID</label>
-    <input id="uid" inputmode="numeric" placeholder="তোমার UID লিখুন">
-    <button class="primary" onclick="checkName()">🔍 CHECK NAME</button>
-    <div id="nameResult" class="result" style="display:none"></div>
+    <input id="uid" inputmode="numeric" maxlength="15" placeholder="তোমার Free Fire UID লিখুন">
+    <button class="check" onclick="checkName()">🔍 CHECK NAME</button>
+    <div class="result" id="res"></div>
   </section>
 
-  <section class="section bigbox">
-    <div class="box-heading">
-      <div class="symbol">🧾</div>
-      <div>
-        <h2>Order Summary</h2>
-        <p>CHECK YOUR PACKAGE</p>
-      </div>
-    </div>
-    <div id="summary" class="muted">একটি প্যাকেজ বেছে নাও।</div>
-    <button class="primary" onclick="startOrder()">CONTINUE TO PAYMENT</button>
-    <div class="info">এটি Demo Order। আসল পেমেন্ট যাচাই ও Diamond Delivery এখনো চালু নেই।</div>
+  <h2 class="section-title" id="walletTitle">💰 WALLET</h2>
+  <section class="panel wallet">
+    <div><div>Wallet Balance</div><div class="balance">৳ <span id="bal">0</span></div></div>
+    <button class="add" onclick="openModal('add')">＋ Add Money</button>
   </section>
-</section>
 
-<section class="page" id="orders">
-  <h2 class="section-title">🧾 My Orders</h2>
-  <div class="bigbox" id="orderList"><div class="empty">এখনও কোনো অর্ডার নেই।</div></div>
-</section>
+  <h2 class="section-title">🧾 ORDER SUMMARY</h2>
+  <section class="panel">
+    <div id="summary" class="summary-line">একটি Diamond বা Membership package নির্বাচন করুন।</div>
+    <button class="primary" onclick="payment()">ORDER NOW</button>
+    <p class="notice">নোট: Payment এবং Diamond delivery এখন Demo mode। Transaction ID লিখলেই বাস্তব payment যাচাই হয় না, এবং এখানে আসল Diamond পাঠানো হয় না। বাস্তব সেবা চালু করতে অনুমোদিত payment provider ও secure backend লাগবে।</p>
+  </section>
 
-<section class="page" id="add">
-  <h2 class="section-title">💰 Add Money</h2>
-  <div class="bigbox">
-    <p class="muted">DEMO WALLET BALANCE</p>
-    <h2>৳<span id="walletBalance">0</span></h2>
-    <label for="amount">Amount (৳)</label>
-    <input id="amount" type="number" min="1" max="10000" placeholder="টাকার পরিমাণ">
-    <button class="primary" onclick="addDemoMoney()">ADD MONEY (DEMO)</button>
-    <p class="muted">এটি শুধু Demo balance, আসল টাকা নয়।</p>
-  </div>
-</section>
+  <h2 class="section-title" id="ordersTitle">📋 ORDERS</h2>
+  <section class="panel order-list" id="orders">এখনও কোনো order নেই।</section>
 
-<section class="page" id="support">
-  <h2 class="section-title">🎧 Support Center</h2>
-  <div class="bigbox">
-    <div class="row">💬 <b>Contact Support</b><br><span class="muted">Support link এখনো যোগ করা হয়নি।</span></div>
-    <div class="row">🧾 <b>Order Help</b><br><span class="muted">তোমার অর্ডার Orders পেজে দেখো।</span></div>
-  </div>
-</section>
-
-<section class="page" id="profile">
-  <h2 class="section-title">👤 My Profile</h2>
-  <div class="bigbox">
-    <div class="row">👤 Guest User</div>
-    <div class="row">💰 Wallet: ৳<span id="profileBalance">0</span></div>
-    <div class="row">🧾 Orders: <span id="profileOrders">0</span></div>
-    <p class="muted">Login ও account verification এখনো চালু নেই।</p>
-  </div>
-</section>
+  <h2 class="section-title" id="supportTitle">🆘 SUPPORT</h2>
+  <section class="panel">
+    <b>TOP1 SHOP Support</b>
+    <p class="notice">Order বা website সংক্রান্ত সাহায্যের জন্য Support ব্যবহার করো।</p>
+    <button class="check" style="width:100%" onclick="alert('TOP1 SHOP Support — Demo')">Contact Support</button>
+  </section>
 </main>
 
-<!-- Bottom navigation only; no extra Chat/Orders shortcuts in the middle -->
 <nav class="bottom">
-  <button class="active" onclick="showPage('home',0)"><span class="navicon">⌂</span>Home</button>
-  <button onclick="showPage('orders',1)"><span class="navicon">🧾</span>Orders</button>
-  <button onclick="showPage('add',2)"><span class="navicon">＋</span>Add Money</button>
-  <button onclick="showPage('support',3)"><span class="navicon">🎧</span>Support</button>
-  <button onclick="showPage('profile',4)"><span class="navicon">👤</span>Profile</button>
+  <button class="nav active" onclick="goHome()"><b>⌂</b>Home</button>
+  <button class="nav" onclick="goTo('ordersTitle')"><b>▤</b>Orders</button>
+  <button class="nav" onclick="openModal('add')"><b>▣</b>Add Money</button>
+  <button class="nav" onclick="goTo('supportTitle')"><b>◉</b>Support</button>
+  <button class="nav" onclick="openModal('login')"><b>♙</b>Profile</button>
 </nav>
 
+<div class="modal" id="pay"><div class="sheet">
+  <button class="close" onclick="closeModal('pay')">×</button><h2>Payment</h2><p id="paySum"></p>
+  <div class="paygrid"><button class="pay on" onclick="setMethod(this,'bKash')">bKash</button><button class="pay" onclick="setMethod(this,'Nagad')">Nagad</button></div>
+  <p><b id="num">Demo bKash Payment Number: 01XXXXXXXXX</b></p>
+  <input id="trx" placeholder="Transaction ID (Demo)">
+  <button class="primary" onclick="verifyDemo()">VERIFY (DEMO ONLY)</button><div id="status"></div>
+</div></div>
+
+<div class="modal" id="add"><div class="sheet">
+  <button class="close" onclick="closeModal('add')">×</button><h2>💰 Add Money</h2>
+  <input id="amount" type="number" min="1" placeholder="Amount ৳">
+  <button class="primary" onclick="addDemoMoney()">ADD MONEY (DEMO)</button>
+  <p class="notice">এটি শুধু Demo wallet balance। বাস্তবে টাকা জমা হয় না।</p>
+</div></div>
+
+<div class="modal" id="login"><div class="sheet">
+  <button class="close" onclick="closeModal('login')">×</button><h2>Profile / Login</h2>
+  <input placeholder="Email / Phone"><br><br><input type="password" placeholder="Password">
+  <button class="primary" onclick="alert('Login is not connected yet — Demo only.')">LOGIN (DEMO)</button>
+  <p class="notice">Login এখনো বাস্তব account system-এর সঙ্গে যুক্ত নয়।</p>
+</div></div>
+
 <script>
-const diamonds=[
- {name:"25 Diamonds",price:20},
- {name:"50 Diamonds",price:35},
- {name:"115 Diamonds",price:78},
- {name:"240 Diamonds",price:155},
- {name:"610 Diamonds",price:395},
- {name:"1240 Diamonds",price:795}
+const DIAMONDS = [
+  {name:"25 Diamonds",price:22},{name:"50 Diamonds",price:36},
+  {name:"100 Diamonds",price:70},{name:"115 Diamonds",price:79},
+  {name:"240 Diamonds",price:158},{name:"355 Diamonds",price:237},
+  {name:"480 Diamonds",price:316},{name:"505 Diamonds",price:336},
+  {name:"610 Diamonds",price:400},{name:"850 Diamonds",price:558},
+  {name:"1090 Diamonds",price:715},{name:"1240 Diamonds",price:800},
+  {name:"1720 Diamonds",price:1116}
 ];
-const memberships=[
- {name:"Weekly Membership",price:152},
- {name:"Monthly Membership",price:760},
- {name:"Weekly Lite",price:40}
+const MEMBERSHIPS = [
+  {name:"Weekly",price:152,icon:"🔥",sub:"Weekly Membership"},
+  {name:"Monthly",price:760,icon:"👑",sub:"Monthly Membership"},
+  {name:"Weekly Lite",price:40,icon:"⭐",sub:"Weekly Lite Membership"}
 ];
-let selected=null,playerName="",balance=0,orders=[];
-const $=id=>document.getElementById(id);
+let selected = null, paymentMethod = "bKash";
+let balance = Number(localStorage.getItem("top1shop_balance") || 0);
+let orders = [];
+const $ = id => document.getElementById(id);
+const money = n => Number(n).toLocaleString("en-US");
+const allPackages = [...DIAMONDS.map(p=>({...p,icon:"💎",type:"diamond"})),...MEMBERSHIPS.map(p=>({...p,type:"membership"}))];
 
 function renderPackages(){
- $("diamonds").innerHTML=diamonds.map((p,i)=>`
- <button class="pkg ${selected&&selected.name===p.name?'selected':''}" onclick="choosePackage('d',${i})">
- <span class="icon">💎</span><b>${p.name}</b><span class="price">৳${p.price}</span>
- </button>`).join("");
-
- $("memberships").innerHTML=memberships.map((p,i)=>`
- <button class="pkg ${selected&&selected.name===p.name?'selected':''}" onclick="choosePackage('m',${i})">
- <span class="icon">👑</span><b>${p.name}</b><span class="price">৳${p.price}</span>
- </button>`).join("");
+  $("diamonds").innerHTML = DIAMONDS.map((p,i)=>`
+    <button class="pkg ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('diamond',${i})">
+      <div class="pkg-top"><span class="pkg-icon">💎</span><span class="pkg-name">${p.name}</span></div>
+      <div class="pkg-price">৳${p.price} TK</div>
+    </button>`).join("");
+  $("memberships").innerHTML = MEMBERSHIPS.map((p,i)=>`
+    <button class="member ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('membership',${i})">
+      <span class="member-icon">${p.icon}</span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-sub">${p.sub}</span></span><span class="member-price">৳${p.price}</span>
+    </button>`).join("");
+  $("bal").textContent=money(balance);$("mini").textContent=money(balance);
 }
-
 function choosePackage(type,i){
- selected=(type==="d"?diamonds:memberships)[i];
- renderPackages();
- updateSummary();
+  selected = type==="diamond" ? {...DIAMONDS[i],icon:"💎",type} : {...MEMBERSHIPS[i],type};
+  updateSummary();renderPackages();
 }
-
 function updateSummary(){
- $("summary").innerHTML=selected?
- `<div class="summary-row"><span>Package</span><b>${selected.name}</b></div>
- <div class="summary-row"><span>Price</span><b style="color:var(--blue)">৳${selected.price}</b></div>
- <div class="summary-row"><span>UID</span><b>${$("uid").value||"দেওয়া হয়নি"}</b></div>
- <div class="summary-row"><span>Player Name</span><b>${playerName||"চেক করা হয়নি"}</b></div>`:
- "একটি প্যাকেজ বেছে নাও।";
+  if(!selected){$("summary").textContent="একটি Diamond বা Membership package নির্বাচন করুন।";return}
+  const uid=$("uid").value.trim();
+  $("summary").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br><span class="notice">UID: ${uid||"এখনো দেওয়া হয়নি"}</span>`;
 }
-
-async function checkName(){
- const uid=$("uid").value.trim(),out=$("nameResult");
- out.style.display="block";
- out.textContent="🔍 Checking...";
- playerName="";
-
- if(!/^\d{6,15}$/.test(uid)){
-  out.textContent="❌ সঠিক UID লিখুন।";
-  updateSummary();
-  return;
- }
-
- try{
-  const r=await fetch("/api/check-name?uid="+encodeURIComponent(uid));
-  const d=await r.json();
-  if(!r.ok)throw Error(d.error||"Game Name পাওয়া যায়নি");
-  playerName=d.name||"";
-  out.textContent="✅ Game Name: "+playerName;
- }catch(e){
-  out.textContent="❌ UID API কাজ করছে না। Backend ও API configuration পরীক্ষা করুন।";
- }
- updateSummary();
-}
-
-function startOrder(){
- if(!selected){alert("আগে একটি Package বেছে নাও।");return}
- const uid=$("uid").value.trim();
- if(!/^\d{6,15}$/.test(uid)){alert("সঠিক Free Fire UID লিখুন।");return}
-
- if(!confirm(selected.name+" — ৳"+selected.price+" দিয়ে Demo Order তৈরি করবেন?"))return;
-
- orders.unshift({
-  name:selected.name,
-  price:selected.price,
-  uid,
-  date:new Date().toLocaleString()
- });
-
- $("orderList").innerHTML=orders.map(o=>`
- <div class="row"><b>${o.name}</b><br>
- <span style="color:var(--blue)">৳${o.price}</span><br>
- UID: ${o.uid}<br><small class="muted">${o.date}</small><br>
- <small class="muted">Demo / Pending</small></div>`).join("");
-
- $("profileOrders").textContent=orders.length;
- showPage("orders",1);
- alert("Demo Order তৈরি হয়েছে। Payment verified হয়নি এবং Diamond পাঠানো হয়নি।");
-}
-
+function openModal(id){$(id).classList.add("show")}
+function closeModal(id){$(id).classList.remove("show")}
+function goTo(id){$(id).scrollIntoView({behavior:"smooth",block:"start"})}
+function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
 function addDemoMoney(){
- const a=Number($("amount").value);
- if(!Number.isFinite(a)||a<1||a>10000){
-  alert("৳১ থেকে ৳১০,০০০ দিন।");
-  return;
- }
- if(!confirm("শুধু Demo balance যোগ হবে। চালিয়ে যাবেন?"))return;
- balance+=a;
- updateBalance();
- $("amount").value="";
+  const amount=Number($("amount").value);
+  if(!Number.isFinite(amount)||amount<=0)return alert("সঠিক amount দিন।");
+  balance+=amount;localStorage.setItem("top1shop_balance",String(balance));renderPackages();
+  $("amount").value="";closeModal("add");alert("Demo balance যোগ হয়েছে; বাস্তব টাকা জমা হয়নি।");
 }
-
-function updateBalance(){
- $("balanceTop").textContent=balance;
- $("walletBalance").textContent=balance;
- $("profileBalance").textContent=balance;
+async function checkName(){
+  const uid=$("uid").value.trim();
+  $("res").style.display="block";$("res").style.background="#fff4e5";$("res").style.color="#8a5200";$("res").textContent="🔍 Checking...";
+  if(!/^\d{6,15}$/.test(uid)){$("res").textContent="❌ সঠিক UID লিখুন।";return}
+  try{
+    const response=await fetch("/api/check-name?uid="+encodeURIComponent(uid),{headers:{"Accept":"application/json"}});
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok||!data.name){$("res").textContent="❌ "+(data.error||"Game Name পাওয়া যায়নি।");return}
+    $("res").style.background="#ecfdf3";$("res").style.color="#13753d";$("res").textContent="✅ Game Name: "+data.name;
+    updateSummary();
+    if(selected){$("summary").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br><span class="notice">UID: ${uid} · ${data.name}</span>`}
+  }catch(error){$("res").textContent="❌ Server connection error। আবার চেষ্টা করুন।"}
 }
-
-function showPage(id,index){
- document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
- document.querySelectorAll(".bottom button").forEach((b,i)=>b.classList.toggle("active",i===index));
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
 $("uid").addEventListener("input",updateSummary);
+function payment(){
+  if(!selected)return alert("আগে একটি package নির্বাচন করুন।");
+  const uid=$("uid").value.trim();
+  if(!/^\d{6,15}$/.test(uid))return alert("আগে সঠিক Free Fire UID দিন।");
+  $("paySum").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br>UID: ${uid}`;
+  $("trx").value="";$("status").innerHTML="";openModal("pay");
+}
+function setMethod(el,method){
+  document.querySelectorAll(".pay").forEach(b=>b.classList.remove("on"));
+  el.classList.add("on");paymentMethod=method;
+  $("num").textContent="Demo "+method+" Payment Number: 01XXXXXXXXX";
+}
+function verifyDemo(){
+  const trx=$("trx").value.trim();
+  if(!trx)return alert("Transaction ID লিখুন।");
+  if(!selected)return alert("আগে package নির্বাচন করুন।");
+  const uid=$("uid").value.trim();
+  $("status").innerHTML=`<div class="success">DEMO ONLY — Payment verify করা হয়নি।<br>Package: ${selected.name}<br>UID: ${uid}<br>${paymentMethod} · TRX: ${escapeHtml(trx)}<br><small>এখানে আসল payment confirmation বা Diamond delivery হয় না।</small></div>`;
+  orders.unshift({name:selected.name,price:selected.price,uid,method:paymentMethod,trx});
+  $("orders").innerHTML=orders.map(o=>`<div class="order-row"><b>${o.name}</b> — ৳${o.price}<br><small>UID: ${o.uid} · ${o.method} · Demo pending</small></div>`).join("");
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 renderPackages();
-updateSummary();
-updateBalance();
 </script>
 </body>
-        </html>
+  </html>
