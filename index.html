@@ -22,18 +22,18 @@ button{cursor:pointer}
 .section-title{text-align:center;font-size:22px;margin:26px 0 13px;font-weight:950;letter-spacing:.2px}
 .panel{background:#fff;border:1px solid #edf0f6;border-radius:22px;padding:15px;box-shadow:0 5px 18px #1b2d4d0b}
 
-.home-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 18px}
-.home-tile{padding:0;overflow:hidden;border:0;border-radius:17px;background:#fff;box-shadow:0 4px 12px #10265b14;text-align:center;color:var(--ink)}
-.tile-art{height:auto;aspect-ratio:1.02;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:12px;color:#fff;background:linear-gradient(145deg,#0b2b78,#2477ee 58%,#6bc8ff)}
+.home-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0 14px}
+.home-tile{min-width:0;padding:0;overflow:hidden;border:0;border-radius:12px;background:#fff;box-shadow:0 3px 8px #10265b12;text-align:center;color:var(--ink)}
+.tile-art{height:auto;aspect-ratio:1.28;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:5px;color:#fff;background:linear-gradient(145deg,#0b2b78,#2477ee 58%,#6bc8ff)}
 .uid-art:before,.member-art:before{content:"";position:absolute;width:180%;height:80%;left:-40%;bottom:-25%;border-radius:50%;background:#ffffff18;transform:rotate(-18deg)}
-.tile-watermark{position:absolute;left:-10px;top:40%;font-size:24px;font-weight:1000;letter-spacing:5px;opacity:.13;transform:rotate(-90deg)}
-.tile-character{font-size:clamp(44px,12vw,74px);filter:drop-shadow(0 5px 3px #001b55aa);z-index:1}
-.tile-art strong{z-index:1;font-size:clamp(20px,5.5vw,34px);line-height:1.05;font-weight:1000;text-shadow:0 3px 2px #081c4d99}
+.tile-watermark{position:absolute;left:-14px;top:40%;font-size:14px;font-weight:1000;letter-spacing:3px;opacity:.13;transform:rotate(-90deg)}
+.tile-character{font-size:clamp(22px,5vw,38px);filter:drop-shadow(0 3px 2px #001b55aa);z-index:1}
+.tile-art strong{z-index:1;font-size:clamp(11px,2.9vw,18px);line-height:1.05;font-weight:1000;text-shadow:0 2px 1px #081c4d99}
 .tile-art em{font-style:normal;color:#ffdf39}
 .member-art{background:linear-gradient(145deg,#123b9b,#1769dd 60%,#8bdcff)}
 .weekly-art{background:linear-gradient(145deg,#4a257f,#7c43c9 60%,#c6a0ff)}
-.tile-gems{font-size:clamp(27px,7vw,44px);margin-bottom:14px;z-index:1;filter:drop-shadow(0 4px 3px #001b55aa)}
-.tile-label{padding:9px 4px 10px;font-size:clamp(11px,3.1vw,15px);font-weight:950}
+.tile-gems{font-size:clamp(15px,3.8vw,25px);margin-bottom:5px;z-index:1;filter:drop-shadow(0 3px 2px #001b55aa)}
+.tile-label{padding:6px 2px 7px;font-size:clamp(9px,2.4vw,12px);line-height:1.2;font-weight:950}
 .package-view{margin-top:16px;scroll-margin-top:82px}
 .package-view[hidden]{display:none}
 .view-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 12px}
@@ -192,6 +192,13 @@ const MEMBERSHIPS = [
   {name:"4x Weekly + 1x Monthly",price:1421,icon:"◉",sub:"Weekly + Monthly"},
   {name:"4x Weekly + 2x Monthly",price:2211,icon:"◉",sub:"Weekly + Monthly"}
 ];
+const WEEKLY_PACKAGES = [
+  {name:"1x Weekly + 1x Weekly Lite",price:191,icon:"◉",sub:"Weekly + Weekly Lite"},
+  {name:"2x Weekly + 2x Weekly Lite",price:383,icon:"◉",sub:"Weekly + Weekly Lite"},
+  {name:"3x Weekly + 3x Weekly Lite",price:575,icon:"◉",sub:"Weekly + Weekly Lite"},
+  {name:"4x Weekly + 1x Weekly Lite",price:647,icon:"◉",sub:"Weekly + Weekly Lite"},
+  {name:"4x Weekly + 2x Weekly Lite",price:687,icon:"◉",sub:"Weekly + Weekly Lite"}
+];
 let selected = null, paymentMethod = "bKash";
 let balance = Number(localStorage.getItem("top1shop_balance") || 0);
 let orders = [];
@@ -203,7 +210,7 @@ function openPackageBox(id){
   $("diamondBox").hidden = id !== "diamondBox";
   $("memberBox").hidden = id !== "memberBox";
   $("weeklyBox").hidden = id !== "weeklyBox";
-  if(id !== "diamondBox") $("uidCheckPanel").hidden = true;
+  $("uidCheckPanel").hidden = true;
   $(id).scrollIntoView({behavior:"smooth",block:"start"});
 }
 function closePackageBox(id){
@@ -219,6 +226,10 @@ function renderPackages(){
     </button>`).join("");
   $("memberships").innerHTML = MEMBERSHIPS.map((p,i)=>`
     <button class="member ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('membership',${i})">
+      <span class="member-radio" aria-hidden="true"></span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-price">${money(p.price)} TK</span></span>
+    </button>`).join("");
+  $("weeklyPackages").innerHTML = WEEKLY_PACKAGES.map((p,i)=>`
+    <button class="member ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('weekly',${i})">
       <span class="member-radio" aria-hidden="true"></span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-price">${money(p.price)} TK</span></span>
     </button>`).join("");
   $("bal").textContent=money(balance);$("mini").textContent=money(balance);
