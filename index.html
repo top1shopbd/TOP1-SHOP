@@ -22,7 +22,7 @@ button{cursor:pointer}
 .section-title{text-align:center;font-size:22px;margin:26px 0 13px;font-weight:950;letter-spacing:.2px}
 .panel{background:#fff;border:1px solid #edf0f6;border-radius:22px;padding:15px;box-shadow:0 5px 18px #1b2d4d0b}
 
-.home-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0 14px}
+.home-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0 14px}
 .home-tile{min-width:0;padding:0;overflow:hidden;border:0;border-radius:12px;background:#fff;box-shadow:0 3px 8px #10265b12;text-align:center;color:var(--ink)}
 .tile-art{height:auto;aspect-ratio:1.28;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:5px;color:#fff;background:linear-gradient(145deg,#0b2b78,#2477ee 58%,#6bc8ff)}
 .uid-art:before,.member-art:before{content:"";position:absolute;width:180%;height:80%;left:-40%;bottom:-25%;border-radius:50%;background:#ffffff18;transform:rotate(-18deg)}
@@ -32,6 +32,7 @@ button{cursor:pointer}
 .tile-art em{font-style:normal;color:#ffdf39}
 .member-art{background:linear-gradient(145deg,#123b9b,#1769dd 60%,#8bdcff)}
 .weekly-art{background:linear-gradient(145deg,#4a257f,#7c43c9 60%,#c6a0ff)}
+.friday-art{background:linear-gradient(145deg,#7b210d,#e85b1d 60%,#ffc35c)}
 .tile-gems{font-size:clamp(15px,3.8vw,25px);margin-bottom:5px;z-index:1;filter:drop-shadow(0 3px 2px #001b55aa)}
 .tile-label{padding:6px 2px 7px;font-size:clamp(9px,2.4vw,12px);line-height:1.2;font-weight:950}
 .package-view{margin-top:16px;scroll-margin-top:82px}
@@ -85,6 +86,10 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
 
   <h2 class="section-title">FREE FIRE</h2>
   <section class="home-tiles">
+    <button class="home-tile" onclick="openPackageBox('fridayBox')">
+      <div class="tile-art friday-art"><span class="tile-gems">⚡ 🔥</span><strong><em>FRIDAY</em><br>OFFER</strong></div>
+      <div class="tile-label">FRIDAY OFFER · ৳150</div>
+    </button>
     <button class="home-tile" onclick="openPackageBox('diamondBox')">
       <div class="tile-art uid-art"><span class="tile-watermark">TOPUP</span><span class="tile-character">🎮</span><strong>UID<br><em>TOPUP</em></strong></div>
       <div class="tile-label">UID TOPUP</div>
@@ -97,6 +102,16 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
       <div class="tile-art weekly-art"><span class="tile-gems">🔥 ⭐</span><strong><em>WEEKLY</em><br>LITE</strong></div>
       <div class="tile-label">WEEKLY + WEEKLY LITE</div>
     </button>
+  </section>
+
+  <section class="package-view" id="fridayBox" hidden>
+    <div class="view-heading"><h2>⚡ Friday Offer</h2><button class="back-btn" onclick="closePackageBox('fridayBox')">← Back</button></div>
+    <div class="panel">
+      <button id="fridayPackage" class="member" style="width:100%" onclick="choosePackage('friday',0)">
+        <span class="member-radio" aria-hidden="true"></span><span class="member-info"><span class="member-name">Weekly — Friday Offer</span><span class="member-price">৳150 TK</span></span>
+      </button>
+      <p id="fridayStatus" class="notice" style="margin-top:12px"></p>
+    </div>
   </section>
 
   <section class="package-view" id="diamondBox" hidden>
@@ -115,6 +130,7 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
   </section>
 
   <section class="panel" id="uidCheckPanel" style="margin-top:14px" hidden>
+    <h2 style="font-size:18px;margin:0 0 10px">🔍 UID Name Check</h2>
     <label for="uid">Free Fire UID</label>
     <input id="uid" inputmode="numeric" maxlength="15" placeholder="তোমার Free Fire UID লিখুন">
     <button class="check" onclick="checkName()">🔍 CHECK NAME</button>
@@ -177,13 +193,13 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
 
 <script>
 const DIAMONDS = [
-  {name:"25 Diamonds",price:22},{name:"50 Diamonds",price:36},
-  {name:"100 Diamonds",price:70},{name:"115 Diamonds",price:79},
-  {name:"240 Diamonds",price:158},{name:"355 Diamonds",price:237},
-  {name:"480 Diamonds",price:316},{name:"505 Diamonds",price:336},
-  {name:"610 Diamonds",price:400},{name:"850 Diamonds",price:558},
-  {name:"1090 Diamonds",price:715},{name:"1240 Diamonds",price:800},
-  {name:"1720 Diamonds",price:1116}
+  {name:"25 Diamonds",price:20},{name:"50 Diamonds",price:34},
+  {name:"100 Diamonds",price:68},{name:"115 Diamonds",price:77},
+  {name:"240 Diamonds",price:156},{name:"355 Diamonds",price:235},
+  {name:"480 Diamonds",price:314},{name:"505 Diamonds",price:334},
+  {name:"610 Diamonds",price:398},{name:"850 Diamonds",price:556},
+  {name:"1090 Diamonds",price:713},{name:"1240 Diamonds",price:798},
+  {name:"1720 Diamonds",price:1114}
 ];
 const MEMBERSHIPS = [
   {name:"1x Weekly + 1x Monthly",price:947,icon:"◉",sub:"Weekly + Monthly"},
@@ -193,11 +209,9 @@ const MEMBERSHIPS = [
   {name:"4x Weekly + 2x Monthly",price:2211,icon:"◉",sub:"Weekly + Monthly"}
 ];
 const WEEKLY_PACKAGES = [
-  {name:"1x Weekly + 1x Weekly Lite",price:191,icon:"◉",sub:"Weekly + Weekly Lite"},
-  {name:"2x Weekly + 2x Weekly Lite",price:383,icon:"◉",sub:"Weekly + Weekly Lite"},
-  {name:"3x Weekly + 3x Weekly Lite",price:575,icon:"◉",sub:"Weekly + Weekly Lite"},
-  {name:"4x Weekly + 1x Weekly Lite",price:647,icon:"◉",sub:"Weekly + Weekly Lite"},
-  {name:"4x Weekly + 2x Weekly Lite",price:687,icon:"◉",sub:"Weekly + Weekly Lite"}
+  {name:"Weekly",price:151,icon:"◉",sub:"Weekly"},
+  {name:"Weekly Lite",price:39,icon:"◉",sub:"Weekly Lite"},
+  {name:"Monthly",price:759,icon:"◉",sub:"Monthly"}
 ];
 let selected = null, paymentMethod = "bKash";
 let balance = Number(localStorage.getItem("top1shop_balance") || 0);
@@ -206,10 +220,28 @@ const $ = id => document.getElementById(id);
 const money = n => Number(n).toLocaleString("en-US");
 const allPackages = [...DIAMONDS.map(p=>({...p,icon:"💎",type:"diamond"})),...MEMBERSHIPS.map(p=>({...p,type:"membership"}))];
 
+function dhakaParts(){
+  const parts = new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Dhaka",weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
+  return Object.fromEntries(parts.filter(p=>p.type!=="literal").map(p=>[p.type,p.value]));
+}
+function isFridayOfferActive(){
+  const t=dhakaParts();
+  // Thursday 00:00 through Friday 00:00 Bangladesh time.
+  return t.weekday==="Thu";
+}
+function updateFridayOffer(){
+  const active=isFridayOfferActive();
+  const btn=$("fridayPackage"), status=$("fridayStatus");
+  if(btn){btn.disabled=!active;btn.style.opacity=active?"1":".5";btn.style.cursor=active?"pointer":"not-allowed";}
+  if(status) status.textContent=active
+    ? "✅ Offer চালু আছে — বৃহস্পতিবার ১২:০০ AM থেকে শুক্রবার ১২:০০ AM (বাংলাদেশ সময়)।"
+    : "⏰ Offer বন্ধ। বৃহস্পতিবার রাত ১২:০০ AM-এ চালু হবে এবং শুক্রবার রাত ১২:০০ AM-এ বন্ধ হবে (বাংলাদেশ সময়)।";
+}
 function openPackageBox(id){
   $("diamondBox").hidden = id !== "diamondBox";
   $("memberBox").hidden = id !== "memberBox";
   $("weeklyBox").hidden = id !== "weeklyBox";
+  $("fridayBox").hidden = id !== "fridayBox";
   $("uidCheckPanel").hidden = true;
   $(id).scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -232,11 +264,16 @@ function renderPackages(){
     <button class="member ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('weekly',${i})">
       <span class="member-radio" aria-hidden="true"></span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-price">${money(p.price)} TK</span></span>
     </button>`).join("");
+  updateFridayOffer();
   $("bal").textContent=money(balance);$("mini").textContent=money(balance);
 }
 function choosePackage(type,i){
   if(type==="diamond"){
     selected = {...DIAMONDS[i],icon:"💎",type};
+    $("uidCheckPanel").hidden = false;
+  } else if(type==="friday") {
+    if(!isFridayOfferActive()) return alert("Friday Offer এখন বন্ধ। বৃহস্পতিবার রাত ১২টা থেকে শুক্রবার রাত ১২টা পর্যন্ত চালু থাকবে।");
+    selected = {name:"Weekly — Friday Offer",price:150,icon:"🔥",type:"friday"};
     $("uidCheckPanel").hidden = false;
   } else if(type==="membership") {
     selected = {...MEMBERSHIPS[i],type};
@@ -246,7 +283,7 @@ function choosePackage(type,i){
     $("uidCheckPanel").hidden = true;
   }
   updateSummary();renderPackages();
-  if(type==="diamond") $("uidCheckPanel").scrollIntoView({behavior:"smooth",block:"start"});
+  if(type==="diamond" || type==="friday") $("uidCheckPanel").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function updateSummary(){
   if(!selected){$("summary").textContent="একটি Diamond বা Membership package নির্বাচন করুন।";return}
@@ -279,6 +316,7 @@ async function checkName(){
 $("uid").addEventListener("input",updateSummary);
 function payment(){
   if(!selected)return alert("আগে একটি package নির্বাচন করুন।");
+  if(selected.type==="friday" && !isFridayOfferActive()) return alert("Friday Offer শেষ হয়েছে।");
   const uid=$("uid").value.trim();
   if(!/^\d{6,15}$/.test(uid))return alert("আগে সঠিক Free Fire UID দিন।");
   $("paySum").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br>UID: ${uid}`;
@@ -302,4 +340,4 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;","
 renderPackages();
 </script>
 </body>
-  </html>
+    </html>
