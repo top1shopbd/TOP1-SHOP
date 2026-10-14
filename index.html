@@ -5,122 +5,131 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TOP1 SHOP — Free Fire Top Up</title>
 <style>
-:root{--blue:#245fe8;--navy:#10265b;--ink:#20283a;--muted:#778196;--bg:#f5f7fb;--line:#e7ebf3}
+:root{--blue:#245fe8;--navy:#10265b;--ink:#20283a;--bg:#f5f7fb;--line:#e7ebf3}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans Bengali",sans-serif;padding-bottom:88px}
-button,input{font:inherit}
-button{cursor:pointer}
-.header{height:72px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 15px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #15254b12}
-.logo{font-size:26px;font-weight:950;color:#1758dc;font-style:italic;letter-spacing:-1px}.logo span{color:#f12e43}
-.actions{display:flex;gap:8px;align-items:center}.mini{background:#eef4ff;color:#1856d9;padding:10px 12px;border-radius:14px;font-weight:900}
-.login,.primary,.check{border:0;border-radius:13px;padding:12px 15px;background:var(--blue);color:white;font-weight:900}
-.container{max-width:900px;margin:auto;padding:0 14px 28px}
-.banner-wrap{margin:16px 0 8px;border-radius:22px;overflow:hidden;background:#dceaff;box-shadow:0 7px 22px #142e6415;position:relative}
-.banner{display:block;width:100%;aspect-ratio:2.25/1;object-fit:cover}
-.dots{display:flex;justify-content:center;gap:9px;padding:12px 0 2px}.dot{width:9px;height:9px;border-radius:50%;background:#c7cbd4}.dot.active{background:var(--blue)}
-.section-title{text-align:center;font-size:22px;margin:26px 0 13px;font-weight:950;letter-spacing:.2px}
-.panel{background:#fff;border:1px solid #edf0f6;border-radius:22px;padding:15px;box-shadow:0 5px 18px #1b2d4d0b}
-
-.home-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0 14px}
-.home-tile{min-width:0;padding:0;overflow:hidden;border:0;border-radius:12px;background:#fff;box-shadow:0 3px 8px #10265b12;text-align:center;color:var(--ink)}
-.tile-art{height:auto;aspect-ratio:1.28;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:5px;color:#fff;background:linear-gradient(145deg,#0b2b78,#2477ee 58%,#6bc8ff)}
-.uid-art:before,.member-art:before{content:"";position:absolute;width:180%;height:80%;left:-40%;bottom:-25%;border-radius:50%;background:#ffffff18;transform:rotate(-18deg)}
-.tile-watermark{position:absolute;left:-14px;top:40%;font-size:14px;font-weight:1000;letter-spacing:3px;opacity:.13;transform:rotate(-90deg)}
-.tile-character{font-size:clamp(22px,5vw,38px);filter:drop-shadow(0 3px 2px #001b55aa);z-index:1}
-.tile-art strong{z-index:1;font-size:clamp(11px,2.9vw,18px);line-height:1.05;font-weight:1000;text-shadow:0 2px 1px #081c4d99}
-.tile-art em{font-style:normal;color:#ffdf39}
-.member-art{background:linear-gradient(145deg,#123b9b,#1769dd 60%,#8bdcff)}
-.weekly-art{background:linear-gradient(145deg,#4a257f,#7c43c9 60%,#c6a0ff)}
-.friday-art{background:linear-gradient(145deg,#7b210d,#e85b1d 60%,#ffc35c)}
-.tile-gems{font-size:clamp(15px,3.8vw,25px);margin-bottom:5px;z-index:1;filter:drop-shadow(0 3px 2px #001b55aa)}
-.tile-label{padding:6px 2px 7px;font-size:clamp(9px,2.4vw,12px);line-height:1.2;font-weight:950}
-.package-view{margin-top:16px;scroll-margin-top:82px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans Bengali",sans-serif;padding-bottom:85px}
+button,input{font:inherit}button{cursor:pointer}
+.header{height:70px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 14px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #15254b12}
+.logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.logo img{width:140px;max-width:38vw;height:52px;object-fit:contain;object-position:left center;display:block}
+.logo-fallback{display:none;color:#1758dc;font-size:22px;font-weight:950;white-space:nowrap}
+.logo-fallback b{color:#f12e43}
+.actions{display:flex;gap:7px;align-items:center}
+.mini{background:#eef4ff;color:#1856d9;padding:9px;border-radius:12px;font-weight:900}
+.login,.primary,.check{border:0;border-radius:12px;padding:11px 13px;background:var(--blue);color:#fff;font-weight:900}
+.container{max-width:850px;margin:auto;padding:0 12px 25px}
+.banner-wrap{margin:12px 0 7px;border-radius:17px;overflow:hidden;background:linear-gradient(135deg,#102758,#1766ee);box-shadow:0 5px 18px #142e6415}
+.banner{display:block;width:100%;aspect-ratio:2.4/1;object-fit:cover}
+.banner-fallback{display:none;aspect-ratio:2.4/1;place-items:center;text-align:center;color:white;font-size:clamp(24px,6vw,40px);font-weight:950}
+.section-title{text-align:center;font-size:20px;margin:20px 0 10px;font-weight:950}
+.panel{background:#fff;border:1px solid #edf0f6;border-radius:18px;padding:12px;box-shadow:0 4px 14px #1b2d4d0b}
+.home-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0}
+.home-tile{padding:0;min-width:0;overflow:hidden;border:1px solid #e7ebf3;border-radius:11px;background:white;text-align:center;color:var(--ink);box-shadow:0 2px 7px #10265b10}
+.tile-art{aspect-ratio:1.65;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px;color:white;font-weight:950;font-size:clamp(14px,3.8vw,21px);line-height:1.1;text-shadow:0 2px 3px #001b55aa}
+.tile-art small{font-size:clamp(9px,2.4vw,12px);margin-top:5px}
+.friday-art{background:linear-gradient(135deg,#7b210d,#e85b1d 60%,#ffc35c)}
+.diamond-art{background:linear-gradient(135deg,#0b2b78,#2477ee 58%,#6bc8ff)}
+.member-art{background:linear-gradient(135deg,#123b9b,#1769dd 60%,#8bdcff)}
+.weekly-art{background:linear-gradient(135deg,#4a257f,#7c43c9 60%,#c6a0ff)}
+.tile-label{padding:6px 2px;font-size:clamp(9px,2.6vw,12px);font-weight:900}
+.package-view{margin-top:12px;scroll-margin-top:78px}
 .package-view[hidden]{display:none}
-.view-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 12px}
-.view-heading h2{font-size:18px;margin:0;font-weight:950}
-.back-btn{border:0;border-radius:11px;padding:9px 11px;background:#eaf1ff;color:#2058d9;font-weight:900;white-space:nowrap}
-
-.pack-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.pkg{min-width:0;border:1.5px solid #e7ebf4;border-radius:16px;background:#fff;padding:14px 10px;text-align:left;box-shadow:0 2px 6px #172b4d06}
-.pkg.selected{border-color:var(--blue);background:#eff5ff;box-shadow:0 0 0 1px #245fe822}
-.pkg-top{display:flex;gap:8px;align-items:center}.pkg-icon{font-size:22px}.pkg-name{font-size:14px;font-weight:850;line-height:1.3}.pkg-price{font-size:16px;color:#2058d9;font-weight:950;margin:9px 0 0 30px}
-.membership-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.member{display:grid;grid-template-columns:26px minmax(0,1fr);align-items:center;gap:8px;min-height:104px;width:100%;border:1.5px solid #e0e5ee;border-radius:25px;background:#fafafa;padding:13px 10px;text-align:center;box-shadow:0 4px 12px #172b4d0a}
-.member.selected{border-color:var(--blue);background:#eff5ff;box-shadow:0 0 0 1px #245fe822}
-.member-radio{width:25px;height:25px;flex:0 0 25px;border:2px solid #dce3ed;border-radius:50%;display:grid;place-items:center}.member.selected .member-radio{border-color:var(--blue)}.member.selected .member-radio:after{content:"";width:11px;height:11px;border-radius:50%;background:var(--blue)}
-.member-info{min-width:0;display:block;text-align:center}.member-name{display:block;font-weight:800;line-height:1.35;font-size:clamp(12px,3.4vw,16px)}.member-sub{display:none}.member-price{display:block;font-weight:950;color:#2058d9;white-space:nowrap;margin-top:5px;font-size:clamp(14px,3.8vw,18px)}
-label{display:block;font-weight:850;margin:10px 0 7px}
-input{width:100%;padding:13px;border:1px solid #d9e0ec;border-radius:12px;background:#fff;font-size:16px;outline:none}
-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
-.check{width:100%;margin-top:9px;background:#17284f}
-.result{display:none;margin-top:9px;padding:11px;border-radius:12px;background:#fff4e5;color:#8a5200;font-weight:800;overflow-wrap:anywhere}
-.wallet{display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(135deg,#102b67,#2869ef);color:#fff}
-.balance{font-size:27px;font-weight:950;margin-top:4px}.add{border:0;border-radius:12px;padding:11px 13px;background:#fff;color:#1457e8;font-weight:900;white-space:nowrap}
-.summary-line{line-height:1.7}.notice{font-size:12px;color:#68748b;line-height:1.55}
-.primary{width:100%;margin-top:12px}
-.order-list .order-row{padding:12px 0;border-bottom:1px solid #edf0f5}.order-list .order-row:last-child{border-bottom:0}
-.bottom{position:fixed;bottom:0;left:0;right:0;height:76px;background:#fff;border-top:1px solid #e7ebf2;display:grid;grid-template-columns:repeat(5,1fr);z-index:12;padding-bottom:env(safe-area-inset-bottom)}
-.nav{border:0;background:none;color:#858da0;font-size:11px;font-weight:800}.nav b{display:block;font-size:21px;margin-bottom:3px}.nav.active{color:var(--blue)}
-.modal{display:none;position:fixed;inset:0;background:#07132988;z-index:30;align-items:flex-end}.modal.show{display:flex}
-.sheet{background:#fff;width:100%;max-width:600px;margin:0 auto;border-radius:24px 24px 0 0;padding:21px;max-height:90vh;overflow:auto}
-.close{float:right;border:0;border-radius:50%;width:35px;height:35px;font-size:22px;background:#f0f3f8}
-.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pay{padding:14px;border:2px solid #e1e6ef;border-radius:13px;text-align:center;font-weight:900}.pay.on{border-color:var(--blue);background:#eff5ff}
-.success{margin-top:12px;background:#ecfdf3;color:#13753d;padding:14px;border-radius:13px;font-weight:800;overflow-wrap:anywhere}
-@media(min-width:650px){.pack-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.membership-list{grid-template-columns:repeat(2,minmax(0,1fr))}.banner{aspect-ratio:2.4/1}}
+.view-heading{display:flex;justify-content:space-between;align-items:center;gap:6px;margin:0 0 10px}
+.view-heading h2{font-size:16px;margin:0;font-weight:950}
+.back-btn{border:0;border-radius:9px;padding:8px;background:#eaf1ff;color:#2058d9;font-weight:900}
+.pack-grid,.membership-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.pkg,.member{min-width:0;border:1.5px solid #e2e7f0;border-radius:13px;background:#fff;padding:10px 8px;text-align:left;box-shadow:0 2px 6px #172b4d06}
+.pkg.selected,.member.selected{border-color:var(--blue);background:#eff5ff}
+.pkg-top{display:flex;gap:6px;align-items:center}
+.pkg-icon{font-size:19px}
+.pkg-name{font-size:13px;font-weight:850;line-height:1.25}
+.pkg-price{font-size:15px;color:#2058d9;font-weight:950;margin:7px 0 0 25px}
+.member{display:grid;grid-template-columns:20px minmax(0,1fr);align-items:center;gap:6px;min-height:72px;padding:9px 6px}
+.member-radio{width:19px;height:19px;border:2px solid #dce3ed;border-radius:50%;display:grid;place-items:center}
+.member.selected .member-radio{border-color:var(--blue)}
+.member.selected .member-radio:after{content:"";width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.member-info{min-width:0;text-align:center}
+.member-name{display:block;font-weight:850;line-height:1.25;font-size:clamp(11px,3vw,14px)}
+.member-price{display:block;font-weight:950;color:#2058d9;margin-top:5px;font-size:clamp(13px,3.6vw,16px)}
+label{display:block;font-weight:850;margin:10px 0 6px}
+input{width:100%;padding:12px;border:1px solid #d9e0ec;border-radius:11px;background:#fff;font-size:16px;outline:none}
+input:focus{border-color:var(--blue)}
+.check{width:100%;margin-top:8px;background:#17284f}
+.result{display:none;margin-top:9px;padding:10px;border-radius:10px;background:#fff4e5;color:#8a5200;font-weight:800;overflow-wrap:anywhere}
+.wallet{display:flex;justify-content:space-between;align-items:center;gap:8px;background:linear-gradient(135deg,#102b67,#2869ef);color:#fff}
+.balance{font-size:24px;font-weight:950;margin-top:4px}
+.add{border:0;border-radius:10px;padding:10px;background:#fff;color:#1457e8;font-weight:900}
+.summary-line{line-height:1.7}
+.notice{font-size:12px;color:#68748b;line-height:1.5}
+.primary{width:100%;margin-top:10px}
+.order-row{padding:10px 0;border-bottom:1px solid #edf0f5}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:70px;background:#fff;border-top:1px solid #e7ebf2;display:grid;grid-template-columns:repeat(5,1fr);z-index:12}
+.nav{border:0;background:none;color:#858da0;font-size:11px;font-weight:800}
+.nav b{display:block;font-size:20px;margin-bottom:3px}
+.nav.active{color:var(--blue)}
+.modal{display:none;position:fixed;inset:0;background:#07132988;z-index:30;align-items:flex-end}
+.modal.show{display:flex}
+.sheet{background:#fff;width:100%;max-width:600px;margin:auto;border-radius:22px 22px 0 0;padding:18px;max-height:90vh;overflow:auto}
+.close{float:right;border:0;border-radius:50%;width:34px;height:34px;font-size:22px;background:#f0f3f8}
+.paygrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pay{padding:12px;border:2px solid #e1e6ef;border-radius:12px;text-align:center;font-weight:900;background:#fff}
+.pay.on{border-color:var(--blue);background:#eff5ff}
+.success{margin-top:10px;background:#ecfdf3;color:#13753d;padding:12px;border-radius:12px;font-weight:800;overflow-wrap:anywhere}
+@media(min-width:650px){.pack-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header class="header">
-  <div class="logo">TOP1 <span>SHOP</span></div>
-  <div class="actions"><div class="mini">৳ <span id="mini">0</span></div><button class="login" onclick="openModal('login')">⇥ Login</button></div>
+  <a class="logo" href="#home" aria-label="TOP1 SHOP Home">
+    <img src="top1-shop-logo.png" alt="TOP1 SHOP" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-fallback">TOP1 <b>SHOP</b></span>
+  </a>
+  <div class="actions">
+    <div class="mini">৳ <span id="mini">0</span></div>
+    <button class="login" onclick="openModal('login')">⇥ Login</button>
+  </div>
 </header>
 
 <main class="container" id="home">
   <div class="banner-wrap">
-    <!-- Upload your banner image to the same GitHub folder as index.html and name it banner.jpg -->
-    <img class="banner" src="banner.jpg" alt="TOP1 SHOP Free Fire top-up banner" onerror="this.style.display='none';document.getElementById('bannerFallback').style.display='grid'">
-    <div id="bannerFallback" style="display:none;aspect-ratio:2.25/1;place-items:center;text-align:center;padding:20px;color:white;background:linear-gradient(135deg,#102758,#1766ee)"><div><b style="font-size:clamp(25px,6vw,42px)">TOP1 SHOP</b><p>FREE FIRE DIAMOND TOP UP 💎</p></div></div>
+    <img class="banner" src="banner.jpg" alt="TOP1 SHOP Banner" onerror="this.style.display='none';document.getElementById('bannerFallback').style.display='grid'">
+    <div id="bannerFallback" class="banner-fallback">TOP1 SHOP<br><small>FREE FIRE DIAMOND TOP UP 💎</small></div>
   </div>
-  <div class="dots"><span class="dot active"></span><span class="dot"></span></div>
 
   <h2 class="section-title">FREE FIRE</h2>
   <section class="home-tiles">
     <button class="home-tile" onclick="openPackageBox('fridayBox')">
-      <div class="tile-art friday-art"><span class="tile-gems">⚡ 🔥</span><strong><em>FRIDAY</em><br>OFFER</strong></div>
-      <div class="tile-label">FRIDAY OFFER · ৳150</div>
+      <div class="tile-art friday-art">⚡ 🔥<br>FRIDAY OFFER</div><div class="tile-label">FRIDAY OFFER · ৳150</div>
     </button>
     <button class="home-tile" onclick="openPackageBox('diamondBox')">
-      <div class="tile-art uid-art"><span class="tile-watermark">TOPUP</span><span class="tile-character">🎮</span><strong>UID<br><em>TOPUP</em></strong></div>
-      <div class="tile-label">UID TOPUP</div>
+      <div class="tile-art diamond-art">🎮<br>UID TOPUP</div><div class="tile-label">DIAMOND TOPUP</div>
     </button>
     <button class="home-tile" onclick="openPackageBox('memberBox')">
-      <div class="tile-art member-art"><span class="tile-gems">💎 💎</span><strong><em>WEEKLY</em><br>MONTHLY</strong></div>
-      <div class="tile-label">WEEKLY + MONTHLY</div>
+      <div class="tile-art member-art">💎 WEEKLY<br>+ MONTHLY</div><div class="tile-label">WEEKLY + MONTHLY</div>
     </button>
     <button class="home-tile" onclick="openPackageBox('weeklyBox')">
-      <div class="tile-art weekly-art"><span class="tile-gems">🔥 ⭐</span><strong><em>WEEKLY</em><br>LITE</strong></div>
-      <div class="tile-label">WEEKLY + WEEKLY LITE</div>
+      <div class="tile-art weekly-art">⭐ WEEKLY<br>LITE</div><div class="tile-label">WEEKLY / WEEKLY LITE</div>
     </button>
   </section>
 
   <section class="package-view" id="fridayBox" hidden>
-    <div class="view-heading"><h2>⚡ Friday Offer</h2><button class="back-btn" onclick="closePackageBox('fridayBox')">← Back</button></div>
+    <div class="view-heading"><h2>🔥 Friday Offer</h2><button class="back-btn" onclick="closePackageBox('fridayBox')">← Back</button></div>
     <div class="panel">
       <button id="fridayPackage" class="member" style="width:100%" onclick="choosePackage('friday',0)">
-        <span class="member-radio" aria-hidden="true"></span><span class="member-info"><span class="member-name">Weekly — Friday Offer</span><span class="member-price">৳150 TK</span></span>
+        <span class="member-radio"></span><span class="member-info"><span class="member-name">Weekly — Friday Offer</span><span class="member-price">৳150 TK</span></span>
       </button>
-      <p id="fridayStatus" class="notice" style="margin-top:12px"></p>
+      <p id="fridayStatus" class="notice"></p>
     </div>
   </section>
 
   <section class="package-view" id="diamondBox" hidden>
-    <div class="view-heading"><h2>💎 UID TOPUP — Diamond Packages</h2><button class="back-btn" onclick="closePackageBox('diamondBox')">← Back</button></div>
+    <div class="view-heading"><h2>💎 Diamond Packages</h2><button class="back-btn" onclick="closePackageBox('diamondBox')">← Back</button></div>
     <div class="panel"><div class="pack-grid" id="diamonds"></div></div>
   </section>
 
   <section class="package-view" id="memberBox" hidden>
-    <div class="view-heading"><h2>🔥 Weekly + Monthly Combos</h2><button class="back-btn" onclick="closePackageBox('memberBox')">← Back</button></div>
+    <div class="view-heading"><h2>🔥 Weekly + Monthly</h2><button class="back-btn" onclick="closePackageBox('memberBox')">← Back</button></div>
     <div class="panel"><div class="membership-list" id="memberships"></div></div>
   </section>
 
@@ -129,42 +138,38 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
     <div class="panel"><div class="membership-list" id="weeklyPackages"></div></div>
   </section>
 
-  <section class="panel" id="uidCheckPanel" style="margin-top:14px" hidden>
-    <h2 style="font-size:18px;margin:0 0 10px">🔍 UID Name Check</h2>
+  <section class="panel" id="uidCheckPanel" style="margin-top:12px" hidden>
+    <h2 style="font-size:17px;margin:0 0 8px">🔍 UID Name Check</h2>
     <label for="uid">Free Fire UID</label>
     <input id="uid" inputmode="numeric" maxlength="15" placeholder="তোমার Free Fire UID লিখুন">
     <button class="check" onclick="checkName()">🔍 CHECK NAME</button>
     <div class="result" id="res"></div>
   </section>
 
-  <h2 class="section-title" id="walletTitle">💰 WALLET</h2>
+  <h2 class="section-title">💰 WALLET</h2>
   <section class="panel wallet">
-    <div><div>Wallet Balance</div><div class="balance">৳ <span id="bal">0</span></div></div>
+    <div>Wallet Balance<div class="balance">৳ <span id="bal">0</span></div></div>
     <button class="add" onclick="openModal('add')">＋ Add Money</button>
   </section>
 
   <h2 class="section-title">🧾 ORDER SUMMARY</h2>
   <section class="panel">
-    <div id="summary" class="summary-line">একটি Diamond বা Membership package নির্বাচন করুন।</div>
+    <div id="summary" class="summary-line">একটি package নির্বাচন করুন।</div>
     <button class="primary" onclick="payment()">ORDER NOW</button>
-    <p class="notice">নোট: Payment এবং Diamond delivery এখন Demo mode। Transaction ID লিখলেই বাস্তব payment যাচাই হয় না, এবং এখানে আসল Diamond পাঠানো হয় না। বাস্তব সেবা চালু করতে অনুমোদিত payment provider ও secure backend লাগবে।</p>
+    <p class="notice">Demo mode: এখানে আসল payment যাচাই বা Diamond delivery হয় না। বাস্তব সেবার জন্য অনুমোদিত payment provider এবং secure backend প্রয়োজন।</p>
   </section>
 
   <h2 class="section-title" id="ordersTitle">📋 ORDERS</h2>
-  <section class="panel order-list" id="orders">এখনও কোনো order নেই।</section>
+  <section class="panel" id="orders">এখনও কোনো order নেই।</section>
 
   <h2 class="section-title" id="supportTitle">🆘 SUPPORT</h2>
-  <section class="panel">
-    <b>TOP1 SHOP Support</b>
-    <p class="notice">Order বা website সংক্রান্ত সাহায্যের জন্য Support ব্যবহার করো।</p>
-    <button class="check" style="width:100%" onclick="alert('TOP1 SHOP Support — Demo')">Contact Support</button>
-  </section>
+  <section class="panel"><b>TOP1 SHOP Support</b><p class="notice">Website সহায়তা — Demo</p><button class="check" style="width:100%" onclick="alert('TOP1 SHOP Support — Demo')">Contact Support</button></section>
 </main>
 
 <nav class="bottom">
   <button class="nav active" onclick="goHome()"><b>⌂</b>Home</button>
   <button class="nav" onclick="goTo('ordersTitle')"><b>▤</b>Orders</button>
-  <button class="nav" onclick="openModal('add')"><b>▣</b>Add Money</button>
+  <button class="nav" onclick="openModal('add')"><b>＋</b>Add Money</button>
   <button class="nav" onclick="goTo('supportTitle')"><b>◉</b>Support</button>
   <button class="nav" onclick="openModal('login')"><b>♙</b>Profile</button>
 </nav>
@@ -174,170 +179,127 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245fe81a}
   <div class="paygrid"><button class="pay on" onclick="setMethod(this,'bKash')">bKash</button><button class="pay" onclick="setMethod(this,'Nagad')">Nagad</button></div>
   <p><b id="num">Demo bKash Payment Number: 01XXXXXXXXX</b></p>
   <input id="trx" placeholder="Transaction ID (Demo)">
-  <button class="primary" onclick="verifyDemo()">VERIFY (DEMO ONLY)</button><div id="status"></div>
+  <button class="primary" onclick="verifyDemo()">VERIFY (DEMO)</button><div id="status"></div>
 </div></div>
 
 <div class="modal" id="add"><div class="sheet">
   <button class="close" onclick="closeModal('add')">×</button><h2>💰 Add Money</h2>
   <input id="amount" type="number" min="1" placeholder="Amount ৳">
   <button class="primary" onclick="addDemoMoney()">ADD MONEY (DEMO)</button>
-  <p class="notice">এটি শুধু Demo wallet balance। বাস্তবে টাকা জমা হয় না।</p>
+  <p class="notice">Demo balance; বাস্তবে টাকা জমা হয় না।</p>
 </div></div>
 
 <div class="modal" id="login"><div class="sheet">
   <button class="close" onclick="closeModal('login')">×</button><h2>Profile / Login</h2>
   <input placeholder="Email / Phone"><br><br><input type="password" placeholder="Password">
-  <button class="primary" onclick="alert('Login is not connected yet — Demo only.')">LOGIN (DEMO)</button>
-  <p class="notice">Login এখনো বাস্তব account system-এর সঙ্গে যুক্ত নয়।</p>
+  <button class="primary" onclick="alert('Login এখনো Demo only.')">LOGIN (DEMO)</button>
+  <p class="notice">Login বাস্তব account system-এর সঙ্গে যুক্ত নয়।</p>
 </div></div>
 
 <script>
-const DIAMONDS = [
-  {name:"25 Diamonds",price:20},{name:"50 Diamonds",price:34},
-  {name:"100 Diamonds",price:68},{name:"115 Diamonds",price:77},
-  {name:"240 Diamonds",price:156},{name:"355 Diamonds",price:235},
-  {name:"480 Diamonds",price:314},{name:"505 Diamonds",price:334},
-  {name:"610 Diamonds",price:398},{name:"850 Diamonds",price:556},
-  {name:"1090 Diamonds",price:713},{name:"1240 Diamonds",price:798},
-  {name:"1720 Diamonds",price:1114}
+const DIAMONDS=[
+{name:"25 Diamonds",price:20},{name:"50 Diamonds",price:34},
+{name:"100 Diamonds",price:68},{name:"115 Diamonds",price:77},
+{name:"240 Diamonds",price:156},{name:"355 Diamonds",price:235},
+{name:"480 Diamonds",price:314},{name:"505 Diamonds",price:334},
+{name:"610 Diamonds",price:398},{name:"850 Diamonds",price:556},
+{name:"1090 Diamonds",price:713},{name:"1240 Diamonds",price:798},
+{name:"1720 Diamonds",price:1114}
 ];
-const MEMBERSHIPS = [
-  {name:"1x Weekly + 1x Monthly",price:947,icon:"◉",sub:"Weekly + Monthly"},
-  {name:"2x Weekly + 2x Monthly",price:1895,icon:"◉",sub:"Weekly + Monthly"},
-  {name:"3x Weekly + 3x Monthly",price:2843,icon:"◉",sub:"Weekly + Monthly"},
-  {name:"4x Weekly + 1x Monthly",price:1421,icon:"◉",sub:"Weekly + Monthly"},
-  {name:"4x Weekly + 2x Monthly",price:2211,icon:"◉",sub:"Weekly + Monthly"}
+const MEMBERSHIPS=[
+{name:"1x Weekly + 1x Monthly",price:947},
+{name:"2x Weekly + 2x Monthly",price:1895},
+{name:"3x Weekly + 3x Monthly",price:2843},
+{name:"4x Weekly + 1x Monthly",price:1421},
+{name:"4x Weekly + 2x Monthly",price:2211}
 ];
-const WEEKLY_PACKAGES = [
-  {name:"Weekly",price:151,icon:"◉",sub:"Weekly"},
-  {name:"Weekly Lite",price:39,icon:"◉",sub:"Weekly Lite"},
-  {name:"Monthly",price:759,icon:"◉",sub:"Monthly"}
+const WEEKLY_PACKAGES=[
+{name:"Weekly",price:151},
+{name:"Weekly Lite",price:39},
+{name:"Monthly",price:759}
 ];
-let selected = null, paymentMethod = "bKash";
-let balance = Number(localStorage.getItem("top1shop_balance") || 0);
-let orders = [];
-const $ = id => document.getElementById(id);
-const money = n => Number(n).toLocaleString("en-US");
-const allPackages = [...DIAMONDS.map(p=>({...p,icon:"💎",type:"diamond"})),...MEMBERSHIPS.map(p=>({...p,type:"membership"}))];
+let selected=null,paymentMethod="bKash",orders=[];
+let balance=Number(localStorage.getItem("top1shop_balance")||0);
+const $=id=>document.getElementById(id);
+const money=n=>Number(n).toLocaleString("en-US");
 
 function dhakaParts(){
-  const parts = new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Dhaka",weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
-  return Object.fromEntries(parts.filter(p=>p.type!=="literal").map(p=>[p.type,p.value]));
+ const p=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Dhaka",weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
+ return Object.fromEntries(p.filter(x=>x.type!=="literal").map(x=>[x.type,x.value]));
 }
-function isFridayOfferActive(){
-  const t=dhakaParts();
-  // Thursday 00:00 through Friday 00:00 Bangladesh time.
-  return t.weekday==="Thu";
-}
+function isFridayOfferActive(){return dhakaParts().weekday==="Thu"}
 function updateFridayOffer(){
-  const active=isFridayOfferActive();
-  const btn=$("fridayPackage"), status=$("fridayStatus");
-  if(btn){btn.disabled=!active;btn.style.opacity=active?"1":".5";btn.style.cursor=active?"pointer":"not-allowed";}
-  if(status) status.textContent=active
-    ? "✅ Offer চালু আছে — বৃহস্পতিবার ১২:০০ AM থেকে শুক্রবার ১২:০০ AM (বাংলাদেশ সময়)।"
-    : "⏰ Offer বন্ধ। বৃহস্পতিবার রাত ১২:০০ AM-এ চালু হবে এবং শুক্রবার রাত ১২:০০ AM-এ বন্ধ হবে (বাংলাদেশ সময়)।";
+ const active=isFridayOfferActive(),b=$("fridayPackage");
+ b.disabled=!active;b.style.opacity=active?"1":".5";
+ $("fridayStatus").textContent=active?"✅ Offer চালু আছে।":"⏰ Offer বৃহস্পতিবার রাত ১২টা থেকে শুক্রবার রাত ১২টা পর্যন্ত চালু থাকবে (বাংলাদেশ সময়)।";
 }
 function openPackageBox(id){
-  $("diamondBox").hidden = id !== "diamondBox";
-  $("memberBox").hidden = id !== "memberBox";
-  $("weeklyBox").hidden = id !== "weeklyBox";
-  $("fridayBox").hidden = id !== "fridayBox";
-  $("uidCheckPanel").hidden = true;
-  $(id).scrollIntoView({behavior:"smooth",block:"start"});
+ ["fridayBox","diamondBox","memberBox","weeklyBox"].forEach(x=>$(x).hidden=x!==id);
+ $("uidCheckPanel").hidden=true;
+ $(id).scrollIntoView({behavior:"smooth",block:"start"});
 }
-function closePackageBox(id){
-  $(id).hidden = true;
-  if(id === "diamondBox") $("uidCheckPanel").hidden = true;
-  window.scrollTo({top:0,behavior:"smooth"});
-}
+function closePackageBox(id){$(id).hidden=true;window.scrollTo({top:0,behavior:"smooth"})}
 function renderPackages(){
-  $("diamonds").innerHTML = DIAMONDS.map((p,i)=>`
-    <button class="pkg ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('diamond',${i})">
-      <div class="pkg-top"><span class="pkg-icon">💎</span><span class="pkg-name">${p.name}</span></div>
-      <div class="pkg-price">৳${p.price} TK</div>
-    </button>`).join("");
-  $("memberships").innerHTML = MEMBERSHIPS.map((p,i)=>`
-    <button class="member ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('membership',${i})">
-      <span class="member-radio" aria-hidden="true"></span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-price">${money(p.price)} TK</span></span>
-    </button>`).join("");
-  $("weeklyPackages").innerHTML = WEEKLY_PACKAGES.map((p,i)=>`
-    <button class="member ${selected && selected.name===p.name ? "selected":""}" onclick="choosePackage('weekly',${i})">
-      <span class="member-radio" aria-hidden="true"></span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-price">${money(p.price)} TK</span></span>
-    </button>`).join("");
-  updateFridayOffer();
-  $("bal").textContent=money(balance);$("mini").textContent=money(balance);
+ $("diamonds").innerHTML=DIAMONDS.map((p,i)=>`<button class="pkg ${selected&&selected.name===p.name?"selected":""}" onclick="choosePackage('diamond',${i})"><div class="pkg-top"><span class="pkg-icon">💎</span><span class="pkg-name">${p.name}</span></div><div class="pkg-price">৳${p.price} TK</div></button>`).join("");
+ $("memberships").innerHTML=MEMBERSHIPS.map((p,i)=>`<button class="member ${selected&&selected.name===p.name?"selected":""}" onclick="choosePackage('membership',${i})"><span class="member-radio"></span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-price">${money(p.price)} TK</span></span></button>`).join("");
+ $("weeklyPackages").innerHTML=WEEKLY_PACKAGES.map((p,i)=>`<button class="member ${selected&&selected.name===p.name?"selected":""}" onclick="choosePackage('weekly',${i})"><span class="member-radio"></span><span class="member-info"><span class="member-name">${p.name}</span><span class="member-price">${money(p.price)} TK</span></span></button>`).join("");
+ updateFridayOffer();$("bal").textContent=money(balance);$("mini").textContent=money(balance);
 }
 function choosePackage(type,i){
-  if(type==="diamond"){
-    selected = {...DIAMONDS[i],icon:"💎",type};
-    $("uidCheckPanel").hidden = false;
-  } else if(type==="friday") {
-    if(!isFridayOfferActive()) return alert("Friday Offer এখন বন্ধ। বৃহস্পতিবার রাত ১২টা থেকে শুক্রবার রাত ১২টা পর্যন্ত চালু থাকবে।");
-    selected = {name:"Weekly — Friday Offer",price:150,icon:"🔥",type:"friday"};
-    $("uidCheckPanel").hidden = false;
-  } else if(type==="membership") {
-    selected = {...MEMBERSHIPS[i],type};
-    $("uidCheckPanel").hidden = true;
-  } else {
-    selected = {...WEEKLY_PACKAGES[i],type};
-    $("uidCheckPanel").hidden = true;
-  }
-  updateSummary();renderPackages();
-  if(type==="diamond" || type==="friday") $("uidCheckPanel").scrollIntoView({behavior:"smooth",block:"start"});
+ if(type==="diamond"){selected={...DIAMONDS[i],type};$("uidCheckPanel").hidden=false}
+ else if(type==="friday"){
+  if(!isFridayOfferActive())return alert("Friday Offer এখন বন্ধ।");
+  selected={name:"Weekly — Friday Offer",price:150,type};$("uidCheckPanel").hidden=false;
+ }else if(type==="membership"){selected={...MEMBERSHIPS[i],type};$("uidCheckPanel").hidden=true}
+ else{selected={...WEEKLY_PACKAGES[i],type};$("uidCheckPanel").hidden=true}
+ updateSummary();renderPackages();
+ if(type==="diamond"||type==="friday")$("uidCheckPanel").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function updateSummary(){
-  if(!selected){$("summary").textContent="একটি Diamond বা Membership package নির্বাচন করুন।";return}
-  const uid=$("uid").value.trim();
-  $("summary").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br><span class="notice">UID: ${uid||"এখনো দেওয়া হয়নি"}</span>`;
+ if(!selected){$("summary").textContent="একটি package নির্বাচন করুন।";return}
+ $("summary").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br><span class="notice">UID: ${$("uid").value.trim()||"এখনো দেওয়া হয়নি"}</span>`;
 }
 function openModal(id){$(id).classList.add("show")}
 function closeModal(id){$(id).classList.remove("show")}
 function goTo(id){$(id).scrollIntoView({behavior:"smooth",block:"start"})}
 function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
 function addDemoMoney(){
-  const amount=Number($("amount").value);
-  if(!Number.isFinite(amount)||amount<=0)return alert("সঠিক amount দিন।");
-  balance+=amount;localStorage.setItem("top1shop_balance",String(balance));renderPackages();
-  $("amount").value="";closeModal("add");alert("Demo balance যোগ হয়েছে; বাস্তব টাকা জমা হয়নি।");
+ const n=Number($("amount").value);if(!Number.isFinite(n)||n<=0)return alert("সঠিক amount দিন।");
+ balance+=n;localStorage.setItem("top1shop_balance",String(balance));renderPackages();$("amount").value="";closeModal("add");alert("Demo balance যোগ হয়েছে; বাস্তব টাকা জমা হয়নি।");
 }
 async function checkName(){
-  const uid=$("uid").value.trim();
-  $("res").style.display="block";$("res").style.background="#fff4e5";$("res").style.color="#8a5200";$("res").textContent="🔍 Checking...";
-  if(!/^\d{6,15}$/.test(uid)){$("res").textContent="❌ সঠিক UID লিখুন।";return}
-  try{
-    const response=await fetch("/api/check-name?uid="+encodeURIComponent(uid),{headers:{"Accept":"application/json"}});
-    const data=await response.json().catch(()=>({}));
-    if(!response.ok||!data.name){$("res").textContent="❌ "+(data.error||"Game Name পাওয়া যায়নি।");return}
-    $("res").style.background="#ecfdf3";$("res").style.color="#13753d";$("res").textContent="✅ Game Name: "+data.name;
-    updateSummary();
-    if(selected){$("summary").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br><span class="notice">UID: ${uid} · ${data.name}</span>`}
-  }catch(error){$("res").textContent="❌ Server connection error। আবার চেষ্টা করুন।"}
+ const uid=$("uid").value.trim();$("res").style.display="block";$("res").textContent="🔍 Checking...";
+ if(!/^\d{6,15}$/.test(uid)){$("res").textContent="❌ সঠিক UID লিখুন।";return}
+ try{
+  const r=await fetch("/api/check-name?uid="+encodeURIComponent(uid),{headers:{Accept:"application/json"}});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok||!d.name){$("res").textContent="❌ "+(d.error||"Game Name পাওয়া যায়নি।");return}
+  $("res").style.background="#ecfdf3";$("res").style.color="#13753d";$("res").textContent="✅ Game Name: "+d.name;
+  updateSummary();$("summary").innerHTML=`<b>${selected?selected.name:"Package নির্বাচন করুন"}</b>${selected?" — ৳"+selected.price:""}<br><span class="notice">UID: ${uid} · ${d.name}</span>`;
+ }catch(e){$("res").textContent="❌ Server connection error। আবার চেষ্টা করুন।"}
 }
 $("uid").addEventListener("input",updateSummary);
 function payment(){
-  if(!selected)return alert("আগে একটি package নির্বাচন করুন।");
-  if(selected.type==="friday" && !isFridayOfferActive()) return alert("Friday Offer শেষ হয়েছে।");
-  const uid=$("uid").value.trim();
-  if(!/^\d{6,15}$/.test(uid))return alert("আগে সঠিক Free Fire UID দিন।");
-  $("paySum").innerHTML=`<b>${selected.name}</b> — ৳${selected.price}<br>UID: ${uid}`;
-  $("trx").value="";$("status").innerHTML="";openModal("pay");
+ if(!selected)return alert("আগে একটি package নির্বাচন করুন।");
+ if(selected.type==="friday"&&!isFridayOfferActive())return alert("Friday Offer শেষ হয়েছে।");
+ if(!/^\d{6,15}$/.test($("uid").value.trim()))return alert("আগে সঠিক Free Fire UID দিন।");
+ $("paySum").textContent=selected.name+" — ৳"+selected.price+" · UID: "+$("uid").value.trim();
+ $("trx").value="";$("status").innerHTML="";openModal("pay");
 }
-function setMethod(el,method){
-  document.querySelectorAll(".pay").forEach(b=>b.classList.remove("on"));
-  el.classList.add("on");paymentMethod=method;
-  $("num").textContent="Demo "+method+" Payment Number: 01XXXXXXXXX";
-}
-function verifyDemo(){
-  const trx=$("trx").value.trim();
-  if(!trx)return alert("Transaction ID লিখুন।");
-  if(!selected)return alert("আগে package নির্বাচন করুন।");
-  const uid=$("uid").value.trim();
-  $("status").innerHTML=`<div class="success">DEMO ONLY — Payment verify করা হয়নি।<br>Package: ${selected.name}<br>UID: ${uid}<br>${paymentMethod} · TRX: ${escapeHtml(trx)}<br><small>এখানে আসল payment confirmation বা Diamond delivery হয় না।</small></div>`;
-  orders.unshift({name:selected.name,price:selected.price,uid,method:paymentMethod,trx});
-  $("orders").innerHTML=orders.map(o=>`<div class="order-row"><b>${o.name}</b> — ৳${o.price}<br><small>UID: ${o.uid} · ${o.method} · Demo pending</small></div>`).join("");
+function setMethod(el,m){
+ document.querySelectorAll(".pay").forEach(b=>b.classList.remove("on"));el.classList.add("on");paymentMethod=m;
+ $("num").textContent="Demo "+m+" Payment Number: 01XXXXXXXXX";
 }
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function verifyDemo(){
+ const trx=$("trx").value.trim();if(!trx)return alert("Transaction ID লিখুন।");
+ if(!selected)return alert("আগে package নির্বাচন করুন।");
+ const uid=$("uid").value.trim();
+ $("status").innerHTML=`<div class="success">DEMO ONLY — Payment verify হয়নি।<br>${selected.name}<br>UID: ${uid}<br>${paymentMethod} · TRX: ${escapeHtml(trx)}<br><small>এখানে আসল payment confirmation বা Diamond delivery হয় না।</small></div>`;
+ orders.unshift({name:selected.name,price:selected.price,uid,method:paymentMethod});
+ $("orders").innerHTML=orders.map(o=>`<div class="order-row"><b>${o.name}</b> — ৳${o.price}<br><small>UID: ${o.uid} · ${o.method} · Demo pending</small></div>`).join("");
+}
 renderPackages();
 </script>
 </body>
-    </html>
+  </html>
