@@ -246,14 +246,28 @@ function renderPackages(){
  updateFridayOffer();$("bal").textContent=money(balance);$("mini").textContent=money(balance);
 }
 function choosePackage(type,i){
- if(type==="diamond"){selected={...DIAMONDS[i],type};$("uidCheckPanel").hidden=false}
- else if(type==="friday"){
+ if(type==="diamond"){
+  selected={...DIAMONDS[i],type};
+ }else if(type==="friday"){
   if(!isFridayOfferActive())return alert("Friday Offer এখন বন্ধ।");
-  selected={name:"Weekly — Friday Offer",price:150,type};$("uidCheckPanel").hidden=false;
- }else if(type==="membership"){selected={...MEMBERSHIPS[i],type};$("uidCheckPanel").hidden=true}
- else{selected={...WEEKLY_PACKAGES[i],type};$("uidCheckPanel").hidden=true}
- updateSummary();renderPackages();
- if(type==="diamond"||type==="friday")$("uidCheckPanel").scrollIntoView({behavior:"smooth",block:"start"});
+  selected={name:"Weekly — Friday Offer",price:150,type};
+ }else if(type==="membership"){
+  selected={...MEMBERSHIPS[i],type};
+ }else{
+  selected={...WEEKLY_PACKAGES[i],type};
+ }
+
+ // সব ধরনের Package Select করলে UID Check দেখাবে
+ $("uidCheckPanel").hidden=false;
+ $("res").style.display="none";
+
+ updateSummary();
+ renderPackages();
+
+ $("uidCheckPanel").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
 }
 function updateSummary(){
  if(!selected){$("summary").textContent="একটি package নির্বাচন করুন।";return}
@@ -302,4 +316,4 @@ function verifyDemo(){
 renderPackages();
 </script>
 </body>
-</html>
+    </html>
