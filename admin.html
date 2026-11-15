@@ -85,9 +85,19 @@ header small{color:#d5e2ff}.card{background:#fff;border:1px solid var(--line);bo
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, setDoc, getDoc, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+const $=id=>document.getElementById(id);
+function say(s,ok=false){const el=$("message"); if(!el)return; el.textContent=s;el.style.background=ok?"#e9f9ef":"#fff4dc";el.style.color=ok?"#176b39":"#805400";}
+say("Firebase SDK লোড হচ্ছে…");
+$("loginBtn").disabled=true;
+try {
+const [appMod, authMod, fsMod] = await Promise.all([
+ import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
+ import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
+ import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js")
+]);
+const {initializeApp}=appMod;
+const {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}=authMod;
+const {getFirestore,collection,addDoc,getDocs,doc,updateDoc,deleteDoc,setDoc,getDoc,query,orderBy,limit}=fsMod;
 
 const firebaseConfig = {
  apiKey: "AIzaSyCDmfbwfPjpAuYmvyBoB3naIDIdUewP0Q8",
@@ -100,8 +110,6 @@ const firebaseConfig = {
 };
 const ADMIN_UID = "88Az1yt76AYAwfQ1pEbBPbUD6mg2";
 const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
-const $=id=>document.getElementById(id);
-function say(s,ok=false){$("message").textContent=s;$("message").style.background=ok?"#e9f9ef":"#fff4dc";$("message").style.color=ok?"#176b39":"#805400";}
 function safe(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 let products=[], editing=null;
 async function loadProducts(){
@@ -115,7 +123,7 @@ async function loadProducts(){
 function clearProduct(){editing=null;$("editId").value="";$("pName").value="";$("pPrice").value="";$("pCategory").value="diamond";$("pOrder").value="10";}
 function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;editing=id;$("editId").value=id;$("pName").value=p.name||"";$("pPrice").value=p.price??"";$("pCategory").value=p.category||"diamond";$("pOrder").value=p.sortOrder??10;window.scrollTo({top:0,behavior:"smooth"});}
 async function removeProduct(id){if(!confirm("এই Package Delete করবে?"))return;try{await deleteDoc(doc(db,"products",id));await loadProducts();say("Package delete হয়েছে।",true);}catch(e){say("Delete হয়নি: "+e.message);}}
-$("saveProduct").onclick=async()=>{const name=$("pName").value.trim(),price=Number($("pPrice").value),category=$("pCategory").value,sortOrder=Number($("pOrder").value)||0;if(!name||!Number.isFinite(price)||price<0){say("Package Name ও সঠিক Price দাও।");return;}try{const data={name,price,category,sortOrder,updatedAt:new Date().toISOString()};if(editing)await updateDoc(doc(db,"products",editing),data);else await addDoc(collection(db,"products),{...data,createdAt:new Date().toISOString()});clearProduct();await loadProducts();say("Package সংরক্ষণ হয়েছে।",true);}catch(e){say("Save হয়নি: "+e.message);}};
+$("saveProduct").onclick=async()=>{const name=$("pName").value.trim(),price=Number($("pPrice").value),category=$("pCategory").value,sortOrder=Number($("pOrder").value)||0;if(!name||!Number.isFinite(price)||price<0){say("Package Name ও সঠিক Price দাও।");return;}try{const data={name,price,category,sortOrder,updatedAt:new Date().toISOString()};if(editing)await updateDoc(doc(db,"products",editing),data);else await addDoc(collection(db,"products"),{...data,createdAt:new Date().toISOString()});clearProduct();await loadProducts();say("Package সংরক্ষণ হয়েছে।",true);}catch(e){say("Save হয়নি: "+e.message);}};
 $("cancelEdit").onclick=clearProduct;
 
 async function saveAssetUrl(kind){
@@ -131,10 +139,17 @@ async function loadBranding(){try{const s=await getDoc(doc(db,"settings","brandi
 $("saveOffer").onclick=async()=>{try{await setDoc(doc(db,"settings","fridayOffer"),{enabled:$("offerEnabled").value==="true",price:Number($("offerPrice").value),updatedAt:new Date().toISOString()});say("Friday Offer settings সংরক্ষণ হয়েছে।",true);}catch(e){say("Offer save হয়নি: "+e.message);}};
 async function loadOffer(){try{const s=await getDoc(doc(db,"settings","fridayOffer"));if(s.exists()){const d=s.data();$("offerEnabled").value=String(d.enabled!==false);$("offerPrice").value=d.price??150;}}catch(e){say("Offer settings পড়া যায়নি: "+e.message);}}
 $("refreshOrders").onclick=async()=>{try{const q=query(collection(db,"orders"),orderBy("createdAt","desc"),limit(50));const snap=await getDocs(q);$("orderList").innerHTML=snap.docs.map(d=>{const x=d.data();return `<div class="item"><div><b>${safe(x.packageName||x.name||"Order")}</b><small>UID: ${safe(x.uid||"—")} · ৳${safe(x.price??"—")} · ${safe(x.status||"pending")}</small></div></div>`}).join("")||"<p class='muted'>কোনো Order পাওয়া যায়নি।</p>";say("Orders refresh হয়েছে।",true);}catch(e){say("Orders load হয়নি: "+e.message);}};
-$("loginBtn").onclick=async()=>{try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);$("password").value="";}catch(e){say("Login হয়নি: "+e.message);}};
+$("loginBtn").disabled=false;
+say("Firebase প্রস্তুত। এখন Admin Email ও Password দিয়ে LOGIN চাপো।",true);
+$("loginBtn").onclick=async()=>{say("Login চেষ্টা চলছে…");$("loginBtn").disabled=true;try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);$("password").value="";}catch(e){say("Login হয়নি: "+(e.code||e.message));}finally{$("loginBtn").disabled=false;}};
 $("logoutBtn").onclick=()=>signOut(auth);
 onAuthStateChanged(auth,async user=>{if(!user){$("loginCard").classList.remove("hidden");$("dashboard").classList.add("hidden");$("adminEmail").textContent="Not signed in";return;}if(user.uid!==ADMIN_UID){await signOut(auth);say("এই Account Admin নয়। Access denied.");return;}$("loginCard").classList.add("hidden");$("dashboard").classList.remove("hidden");$("adminEmail").textContent=user.email||"Verified Admin";say("Admin Login সফল।",true);try{await Promise.all([loadProducts(),loadBranding(),loadOffer()]);}catch(e){say("ডেটা লোড হয়নি: "+e.message);}});
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("hidden",x.id!==b.dataset.tab));});
+} catch(err) {
+ console.error("TOP1 SHOP Firebase startup error", err);
+ say("Firebase চালু হয়নি: "+(err.message||String(err))+" — Internet connection ও GitHub Pages URL পরীক্ষা করো।");
+ $("loginBtn").disabled=true;
+}
 </script>
 <!-- Security note: also enforce the admin UID in Firestore Security Rules. The UID check in this page alone is not a security boundary. -->
 </body></html>
