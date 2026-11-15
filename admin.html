@@ -1,155 +1,53 @@
 <!doctype html>
-<html lang="bn">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TOP1 SHOP — Admin Panel</title>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101d42"><title>TOP1 SHOP | Admin</title>
 <style>
-:root{--blue:#245fe8;--navy:#10265b;--bg:#f3f6fc;--ink:#20283a;--line:#e5eaf3}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans Bengali",sans-serif}
-button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;font-weight:800;background:var(--blue);color:#fff}
-input,select{width:100%;padding:12px;border:1px solid #d8e0ed;border-radius:10px;background:#fff;margin:6px 0 12px}
-label{font-weight:800;font-size:13px}.wrap{max-width:1000px;margin:auto;padding:15px}
-header{background:var(--navy);color:#fff;padding:18px;border-radius:16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-header small{color:#d5e2ff}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;margin:14px 0;box-shadow:0 3px 12px #10265b0a}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#eef4ff;padding:14px;border-radius:12px}.stat b{display:block;font-size:23px;color:#174fc8}
-.tabs{display:flex;gap:7px;overflow:auto;margin:14px 0}.tabs button{white-space:nowrap;background:#e7efff;color:#174fc8}.tabs button.active{background:var(--blue);color:white}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.muted{color:#68758c;font-size:12px;line-height:1.5}.danger{background:#d93045}.gray{background:#68758c}.green{background:#16834b}
-.item{border:1px solid var(--line);border-radius:11px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}.item small{display:block;color:#68758c;margin-top:4px}
-#message{padding:10px;border-radius:10px;background:#fff4dc;color:#805400;margin:10px 0;white-space:pre-wrap}.hidden{display:none!important}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header{align-items:flex-start;flex-direction:column}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<header><div><b>TOP1 SHOP</b><br><small>ADMIN CONTROL PANEL</small></div><div id="adminEmail" class="muted" style="color:#fff">Not signed in</div></header>
-<div id="message">প্রথমে Admin Email ও Password দিয়ে Login করুন।</div>
-
-<section id="loginCard" class="card">
-<h2>Admin Login</h2>
-<label for="email">Admin Email</label><input id="email" type="email" autocomplete="username" placeholder="তোমার Admin Email">
-<label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Admin Password">
-<button id="loginBtn">LOGIN</button>
-<p class="muted">শুধু নির্দিষ্ট Admin UID-কে Dashboard ব্যবহার করতে দেওয়া হবে। Password কখনো কোডে লিখবে না।</p>
-</section>
-
+:root{--n:#101d42;--b:#3569f6;--bg:#f3f6fc;--ink:#18233d;--muted:#71809b;--line:#e5eaf3;--red:#d94358;--green:#138b5b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans Bengali",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;font-weight:800;background:var(--b);color:white}input,select,textarea{width:100%;padding:12px;border:1px solid #dce3ef;border-radius:10px;background:white;margin:7px 0 13px}textarea{min-height:100px}label{font-size:13px;font-weight:800}.wrap{max-width:1150px;margin:auto;padding:16px}.top{background:linear-gradient(120deg,#101d42,#2458b8);color:white;border-radius:18px;padding:20px;display:flex;justify-content:space-between;gap:12px}.top small{color:#c9d8ff}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}.muted{font-size:12px;color:var(--muted);line-height:1.5}.hidden{display:none!important}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat{background:white;border:1px solid var(--line);border-radius:13px;padding:14px}.stat b{display:block;font-size:25px;color:#2456c5}.tabs{display:flex;gap:7px;overflow:auto;position:sticky;top:0;background:var(--bg);padding:5px 0;z-index:2}.tabs button{white-space:nowrap;background:#e7edff;color:#254fbd}.tabs button.active{background:var(--n);color:white}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}.gray{background:#6c7890}.red{background:var(--red)}.item{border:1px solid var(--line);border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}.item small{display:block;color:var(--muted);font-size:12px;margin-top:4px}.thumb{width:52px;height:52px;object-fit:cover;border-radius:10px;vertical-align:middle;margin-right:9px}.preview{max-width:170px;max-height:90px;object-fit:contain}.actions{display:flex;gap:6px}.small{padding:8px 10px;font-size:12px}#message{padding:12px;border-radius:10px;background:#fff4d8;color:#795300;margin:12px 0;white-space:pre-wrap}.empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed #ccd5e4;border-radius:12px}@media(max-width:680px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.top{flex-direction:column}.item{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions button{flex:1}}
+</style></head><body><div class="wrap">
+<header class="top"><div><b style="font-size:22px">💎 TOP1 SHOP</b><br><small>ADMIN CONTROL CENTER</small></div><div id="adminEmail">Not signed in</div></header>
+<div id="message">Admin Email ও Password দিয়ে Login করুন।</div>
+<section id="loginCard" class="card" style="max-width:430px;margin:30px auto"><h2>🔐 Admin Login</h2><label>Admin Email</label><input id="email" type="email" autocomplete="username"><label>Password</label><input id="password" type="password" autocomplete="current-password"><button id="loginBtn" style="width:100%">LOGIN</button><p class="muted">Password কোডে সংরক্ষণ করা হয় না।</p></section>
 <main id="dashboard" class="hidden">
-<div class="stats">
-<div class="stat">Products <b id="productCount">0</b></div>
-<div class="stat">Admin status <b style="font-size:16px">Verified</b></div>
-<div class="stat">Project <b style="font-size:16px">top1-shop</b></div>
-</div>
-<nav class="tabs">
-<button class="active" data-tab="products">💎 Packages</button>
-<button data-tab="branding">🖼️ Logo / Banner</button>
-<button data-tab="offers">🔥 Offers</button>
-<button data-tab="orders">🧾 Orders</button>
-</nav>
-
-<section id="products" class="card tab">
-<h2>Diamond / Package Control</h2>
-<p class="muted">নতুন Package যোগ, দাম পরিবর্তন বা Delete করতে পারবে। Category ঠিকভাবে বেছে নাও।</p>
-<div class="grid">
-<div><label>Package Name</label><input id="pName" placeholder="যেমন: 115 Diamonds"></div>
-<div><label>Price (৳)</label><input id="pPrice" type="number" min="0" placeholder="যেমন: 78"></div>
-<div><label>Category</label><select id="pCategory"><option value="diamond">Diamond</option><option value="membership">Weekly + Monthly</option><option value="weekly">Weekly / Weekly Lite</option><option value="friday">Friday Offer</option></select></div>
-<div><label>Sort order</label><input id="pOrder" type="number" value="10"></div>
-</div>
-<div class="row"><button id="saveProduct">SAVE PACKAGE</button><button id="cancelEdit" class="gray">CLEAR</button></div>
-<input id="editId" type="hidden">
-<div id="productList"></div>
-</section>
-
-<section id="branding" class="card tab hidden">
-<h2>Logo & Banner Control</h2>
-<p class="muted">Firebase Storage ছাড়াই সরাসরি ছবির URL Firestore-এ সংরক্ষণ করা হবে। আগে থেকে অনলাইনে থাকা ছবির HTTPS URL দাও।</p>
-<label>Website Logo Image URL</label><input id="logoUrlInput" type="url" placeholder="https://example.com/logo.png"><button id="saveLogo">SAVE LOGO URL</button><p id="logoUrl" class="muted"></p>
-<hr style="border:0;border-top:1px solid #e5eaf3;margin:18px 0">
-<label>Website Banner Image URL</label><input id="bannerUrlInput" type="url" placeholder="https://example.com/banner.jpg"><button id="saveBanner">SAVE BANNER URL</button><p id="bannerUrl" class="muted"></p>
-</section>
-
-<section id="offers" class="card tab hidden">
-<h2>Friday Offer Settings</h2>
-<label>Offer enabled</label><select id="offerEnabled"><option value="true">Enabled</option><option value="false">Disabled</option></select>
-<label>Offer price (৳)</label><input id="offerPrice" type="number" min="0" value="150">
-<button id="saveOffer">SAVE OFFER SETTINGS</button>
-<p class="muted">এটি Firestore-এ offer settings সংরক্ষণ করবে। Customer website-এ দেখাতে website code-এ Firestore read যুক্ত থাকতে হবে।</p>
-</section>
-
-<section id="orders" class="card tab hidden">
-<h2>Orders</h2><p class="muted">Firestore-এর orders collection-এর সাম্প্রতিক Order এখানে দেখা যাবে, যদি collection-এ ডেটা থাকে।</p>
-<button id="refreshOrders">REFRESH ORDERS</button><div id="orderList"></div>
-</section>
-<div class="card"><button id="logoutBtn" class="danger">LOGOUT</button><p class="muted">Admin Dashboard-এ প্রবেশের URL: তোমার-ওয়েবসাইটের-ঠিকানা/admin.html</p></div>
-</main>
-</div>
-
+<div class="stats"><div class="stat">Packages<b id="productCount">0</b></div><div class="stat">Orders (last 50)<b id="orderCount">0</b></div><div class="stat">User Profiles<b id="userCount">0</b></div><div class="stat">Admin<b style="font-size:16px;color:#138b5b">Verified</b></div></div>
+<nav class="tabs"><button class="active" data-tab="home">🏠 Dashboard</button><button data-tab="products">💎 Packages</button><button data-tab="branding">🖼️ Logo/Banner</button><button data-tab="notice">📢 Notice</button><button data-tab="offers">🔥 Offers</button><button data-tab="orders">🧾 Orders</button><button data-tab="users">👥 Users</button></nav>
+<section id="home" class="card tab"><h2>TOP1 SHOP Dashboard</h2><p class="muted">Package, Price, Image, Logo, Banner, Notice ও Offer এখান থেকে নিয়ন্ত্রণ করো। Firestore-এ Save হবে। Customer Website-এ Live দেখাতে `index.html`-এও Firestore live read যুক্ত থাকতে হবে।</p><button data-goto="products">Manage Packages</button></section>
+<section id="products" class="card tab hidden"><h2>Diamond / Package Manager</h2><p class="muted">নতুন Package যোগ, পুরোনো Package Edit/Delete, Price ও Image পরিবর্তন।</p><input id="editId" type="hidden"><div class="grid"><div><label>Package Name</label><input id="pName" placeholder="115 Diamonds"></div><div><label>Price (৳)</label><input id="pPrice" type="number" min="0" step="0.01"></div><div><label>Category</label><select id="pCategory"><option value="diamond">Diamond</option><option value="membership">Membership</option><option value="weekly">Weekly Package</option><option value="friday">Friday Offer</option></select></div><div><label>Display Order</label><input id="pOrder" type="number" value="10"></div></div><label>Package Image URL (optional)</label><input id="pImageUrl" type="url" placeholder="https://..."><label>অথবা Image Upload</label><input id="pImageFile" type="file" accept="image/*"><img id="pImagePreview" class="preview hidden" alt="Preview"><div class="row"><button id="saveProduct">SAVE PACKAGE</button><button id="cancelEdit" class="gray">CLEAR</button></div><hr><h3>All Packages</h3><div id="productList" class="empty">Loading...</div></section>
+<section id="branding" class="card tab hidden"><h2>Logo & Banner Control</h2><p class="muted">Firebase Storage-এ Upload হবে, URL settings/branding-এ Save হবে।</p><div class="grid"><div><label>Website Logo</label><input id="logoFile" type="file" accept="image/*"><button id="uploadLogo">UPLOAD LOGO</button><p id="logoUrl" class="muted"></p></div><div><label>Website Banner</label><input id="bannerFile" type="file" accept="image/*"><button id="uploadBanner">UPLOAD BANNER</button><p id="bannerUrl" class="muted"></p></div></div></section>
+<section id="notice" class="card tab hidden"><h2>Website Notice</h2><label>Status</label><select id="noticeEnabled"><option value="true">Published</option><option value="false">Hidden</option></select><label>Notice Title</label><input id="noticeTitle" placeholder="জরুরি ঘোষণা"><label>Notice Message</label><textarea id="noticeMessage" placeholder="কাস্টমারদের জন্য Notice..."></textarea><button id="saveNotice">SAVE NOTICE</button></section>
+<section id="offers" class="card tab hidden"><h2>Friday Offer</h2><label>Offer Status</label><select id="offerEnabled"><option value="true">Enabled</option><option value="false">Disabled</option></select><label>Offer Price (৳)</label><input id="offerPrice" type="number" min="0" value="150"><button id="saveOffer">SAVE OFFER</button><p class="muted">Schedule customer website code-এর সঙ্গে মিলতে হবে।</p></section>
+<section id="orders" class="card tab hidden"><h2>Recent Orders</h2><button id="refreshOrders">REFRESH ORDERS</button><div id="orderList" class="empty">Refresh চাপুন।</div></section>
+<section id="users" class="card tab hidden"><h2>Registered User Profiles</h2><p class="muted">এখানে Firestore users collection-এর profile দেখাবে; Firebase Auth-এর সব Gmail account গণনার জন্য secure Admin backend/Cloud Function প্রয়োজন।</p><button id="refreshUsers">REFRESH USERS</button><div id="userList" class="empty">Refresh চাপুন।</div></section>
+<div class="card"><button id="logoutBtn" class="red">LOGOUT</button></div></main></div>
 <script type="module">
-const $=id=>document.getElementById(id);
-function say(s,ok=false){const el=$("message"); if(!el)return; el.textContent=s;el.style.background=ok?"#e9f9ef":"#fff4dc";el.style.color=ok?"#176b39":"#805400";}
-say("Firebase SDK লোড হচ্ছে…");
-$("loginBtn").disabled=true;
-try {
-const [appMod, authMod, fsMod] = await Promise.all([
- import("https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js"),
- import("https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js"),
- import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js")
-]);
-const {initializeApp}=appMod;
-const {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}=authMod;
-const {getFirestore,collection,addDoc,getDocs,doc,updateDoc,deleteDoc,setDoc,getDoc,query,orderBy,limit}=fsMod;
-
-const firebaseConfig = {
- apiKey: "AIzaSyCDmfbwfPjpAuYmvyBoB3naIDIdUewP0Q8",
- authDomain: "top1-shop.firebaseapp.com",
- projectId: "top1-shop",
- storageBucket: "top1-shop.firebasestorage.app",
- messagingSenderId: "75243074139",
- appId: "1:75243074139:web:e325c89d9a88f71848057e",
- measurementId: "G-RFLZGST4GP"
-};
-const ADMIN_UID = "88Az1yt76AYAwfQ1pEbBPbUD6mg2";
-const app=initializeApp(firebaseConfig), auth=getAuth(app), db=getFirestore(app);
-function safe(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-let products=[], editing=null;
-async function loadProducts(){
- const snap=await getDocs(collection(db,"products"));
- products=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.sortOrder||0)-(b.sortOrder||0));
- $("productCount").textContent=products.length;
- $("productList").innerHTML=products.map(p=>`<div class="item"><div><b>${safe(p.name)}</b><small>${safe(p.category)} · ৳${safe(p.price)}</small></div><div class="row" style="flex:0 0 auto"><button data-edit="${p.id}">EDIT</button><button class="danger" data-delete="${p.id}">DELETE</button></div></div>`).join("")||"<p class='muted'>এখনো কোনো package যোগ করা হয়নি।</p>";
- $("productList").querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>editProduct(b.dataset.edit));
- $("productList").querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>removeProduct(b.dataset.delete));
-}
-function clearProduct(){editing=null;$("editId").value="";$("pName").value="";$("pPrice").value="";$("pCategory").value="diamond";$("pOrder").value="10";}
-function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;editing=id;$("editId").value=id;$("pName").value=p.name||"";$("pPrice").value=p.price??"";$("pCategory").value=p.category||"diamond";$("pOrder").value=p.sortOrder??10;window.scrollTo({top:0,behavior:"smooth"});}
-async function removeProduct(id){if(!confirm("এই Package Delete করবে?"))return;try{await deleteDoc(doc(db,"products",id));await loadProducts();say("Package delete হয়েছে।",true);}catch(e){say("Delete হয়নি: "+e.message);}}
-$("saveProduct").onclick=async()=>{const name=$("pName").value.trim(),price=Number($("pPrice").value),category=$("pCategory").value,sortOrder=Number($("pOrder").value)||0;if(!name||!Number.isFinite(price)||price<0){say("Package Name ও সঠিক Price দাও।");return;}try{const data={name,price,category,sortOrder,updatedAt:new Date().toISOString()};if(editing)await updateDoc(doc(db,"products",editing),data);else await addDoc(collection(db,"products"),{...data,createdAt:new Date().toISOString()});clearProduct();await loadProducts();say("Package সংরক্ষণ হয়েছে।",true);}catch(e){say("Save হয়নি: "+e.message);}};
-$("cancelEdit").onclick=clearProduct;
-
-async function saveAssetUrl(kind){
- const input=$(kind+"UrlInput"), url=input.value.trim();
- if(!url){say("আগে একটি Image URL দাও।");return;}
- try{const parsed=new URL(url);if(parsed.protocol!=="https:"){say("নিরাপত্তার জন্য HTTPS Image URL ব্যবহার করো।");return;}
- await setDoc(doc(db,"settings","branding"),{[kind+"Url"]:url,updatedAt:new Date().toISOString()},{merge:true});
- $(kind+"Url").textContent="Saved URL: "+url;say(kind+" URL Firestore-এ সংরক্ষণ হয়েছে।",true);
- }catch(e){say("URL Save হয়নি: "+e.message);}
-}
-$("saveLogo").onclick=()=>saveAssetUrl("logo");$("saveBanner").onclick=()=>saveAssetUrl("banner");
-async function loadBranding(){try{const s=await getDoc(doc(db,"settings","branding"));if(s.exists()){const d=s.data();$("logoUrl").textContent=d.logoUrl||"Logo এখনো সেট করা হয়নি";$("bannerUrl").textContent=d.bannerUrl||"Banner এখনো সেট করা হয়নি";$("logoUrlInput").value=d.logoUrl||"";$("bannerUrlInput").value=d.bannerUrl||"";}}catch(e){say("Branding পড়া যায়নি: "+e.message);}}
-$("saveOffer").onclick=async()=>{try{await setDoc(doc(db,"settings","fridayOffer"),{enabled:$("offerEnabled").value==="true",price:Number($("offerPrice").value),updatedAt:new Date().toISOString()});say("Friday Offer settings সংরক্ষণ হয়েছে।",true);}catch(e){say("Offer save হয়নি: "+e.message);}};
-async function loadOffer(){try{const s=await getDoc(doc(db,"settings","fridayOffer"));if(s.exists()){const d=s.data();$("offerEnabled").value=String(d.enabled!==false);$("offerPrice").value=d.price??150;}}catch(e){say("Offer settings পড়া যায়নি: "+e.message);}}
-$("refreshOrders").onclick=async()=>{try{const q=query(collection(db,"orders"),orderBy("createdAt","desc"),limit(50));const snap=await getDocs(q);$("orderList").innerHTML=snap.docs.map(d=>{const x=d.data();return `<div class="item"><div><b>${safe(x.packageName||x.name||"Order")}</b><small>UID: ${safe(x.uid||"—")} · ৳${safe(x.price??"—")} · ${safe(x.status||"pending")}</small></div></div>`}).join("")||"<p class='muted'>কোনো Order পাওয়া যায়নি।</p>";say("Orders refresh হয়েছে।",true);}catch(e){say("Orders load হয়নি: "+e.message);}};
-$("loginBtn").disabled=false;
-say("Firebase প্রস্তুত। এখন Admin Email ও Password দিয়ে LOGIN চাপো।",true);
-$("loginBtn").onclick=async()=>{say("Login চেষ্টা চলছে…");$("loginBtn").disabled=true;try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);$("password").value="";}catch(e){say("Login হয়নি: "+(e.code||e.message));}finally{$("loginBtn").disabled=false;}};
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import{getFirestore,collection,addDoc,getDocs,doc,updateDoc,deleteDoc,setDoc,getDoc,query,orderBy,limit}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import{getStorage,ref,uploadBytes,getDownloadURL}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+const firebaseConfig={apiKey:"AIzaSyCDmfbwfPjpAuYmvyBoB3naIDIdUewP0Q8",authDomain:"top1-shop.firebaseapp.com",projectId:"top1-shop",storageBucket:"top1-shop.firebasestorage.app",messagingSenderId:"75243074139",appId:"1:75243074139:web:e325c89d9a88f71848057e",measurementId:"G-RFLZGST4GP"};
+const ADMIN_UID="88Az1yt76AYAwfQ1pEbBPbUD6mg2",app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app),$=id=>document.getElementById(id);
+let products=[],editing=null;
+function say(t,ok=false){$("message").textContent=t;$("message").style.background=ok?"#e8f8ef":"#fff4d8";$("message").style.color=ok?"#176b42":"#795300"}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function tab(id){document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));document.querySelectorAll(".tab").forEach(s=>s.classList.toggle("hidden",s.id!==id))}
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>tab(b.dataset.tab));document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>tab(b.dataset.goto));
+async function upload(file,folder){if(!file)throw Error("আগে ছবি নির্বাচন করুন।");if(!file.type.startsWith("image/"))throw Error("শুধু Image File Upload করা যাবে।");if(file.size>5*1024*1024)throw Error("ছবির সাইজ ৫ MB-এর কম হতে হবে।");let r=ref(storage,folder+"/"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_"));await uploadBytes(r,file,{contentType:file.type});return getDownloadURL(r)}
+async function loadProducts(){let s=await getDocs(query(collection(db,"products"),orderBy("sortOrder","asc")));products=s.docs.map(d=>({id:d.id,...d.data()}));$("productCount").textContent=products.length;$("productList").className=products.length?"":"empty";$("productList").innerHTML=products.map(p=>`<div class="item"><div>${p.imageUrl?`<img class="thumb" src="${esc(p.imageUrl)}">`:"💎"}<b>${esc(p.name)}</b><small>${esc(p.category)} · ৳${esc(p.price)}</small></div><div class="actions"><button class="small" data-edit="${esc(p.id)}">EDIT</button><button class="small red" data-del="${esc(p.id)}">DELETE</button></div></div>`).join("")||"এখনো কোনো Package নেই।";$("productList").querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>edit(b.dataset.edit));$("productList").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>remove(b.dataset.del))}
+function clearForm(){editing=null;$("editId").value="";$("pName").value="";$("pPrice").value="";$("pCategory").value="diamond";$("pOrder").value="10";$("pImageUrl").value="";$("pImageFile").value="";$("pImagePreview").classList.add("hidden");$("saveProduct").textContent="SAVE PACKAGE"}
+function edit(id){let p=products.find(x=>x.id===id);if(!p)return;editing=id;$("editId").value=id;$("pName").value=p.name||"";$("pPrice").value=p.price??"";$("pCategory").value=p.category||"diamond";$("pOrder").value=p.sortOrder??10;$("pImageUrl").value=p.imageUrl||"";$("pImagePreview").src=p.imageUrl||"";$("pImagePreview").classList.toggle("hidden",!p.imageUrl);$("saveProduct").textContent="UPDATE PACKAGE";window.scrollTo({top:0,behavior:"smooth"})}
+async function remove(id){if(!confirm("Package Delete করবেন?"))return;try{await deleteDoc(doc(db,"products",id));await loadProducts();say("Package Delete হয়েছে।",true)}catch(e){say("Delete হয়নি: "+e.message)}}
+$("pImageFile").onchange=()=>{let f=$("pImageFile").files[0];if(f){$("pImagePreview").src=URL.createObjectURL(f);$("pImagePreview").classList.remove("hidden")}};
+$("pImageUrl").oninput=()=>{let u=$("pImageUrl").value.trim();if(u){$("pImagePreview").src=u;$("pImagePreview").classList.remove("hidden")}};
+$("saveProduct").onclick=async()=>{let name=$("pName").value.trim(),price=Number($("pPrice").value);if(!name||$("pPrice").value===""||!Number.isFinite(price)||price<0){say("Package Name ও সঠিক Price দিন।");return}let btn=$("saveProduct");btn.disabled=true;try{let imageUrl=$("pImageUrl").value.trim(),file=$("pImageFile").files[0];if(file)imageUrl=await upload(file,"package-images");let data={name,price,category:$("pCategory").value,sortOrder:Number($("pOrder").value)||0,imageUrl,updatedAt:new Date().toISOString()};if(editing)await updateDoc(doc(db,"products",editing),data);else await addDoc(collection(db,"products"),{...data,createdAt:new Date().toISOString()});clearForm();await loadProducts();say("Package Firestore-এ Save হয়েছে। Customer site-এ Live দেখাতে index.html-এ live Firestore read থাকতে হবে।",true)}catch(e){say("Save হয়নি: "+e.message)}finally{btn.disabled=false}};
+$("cancelEdit").onclick=clearForm;
+async function brand(kind){try{let url=await upload($(kind+"File").files[0],"site-assets");await setDoc(doc(db,"settings","branding"),{[kind+"Url"]:url,updatedAt:new Date().toISOString()},{merge:true});$(kind+"Url").textContent="Saved: "+url;say(kind+" Upload ও Save হয়েছে।",true)}catch(e){say("Upload হয়নি: "+e.message)}}
+$("uploadLogo").onclick=()=>brand("logo");$("uploadBanner").onclick=()=>brand("banner");
+async function loadBrand(){let s=await getDoc(doc(db,"settings","branding"));if(s.exists()){let d=s.data();$("logoUrl").textContent=d.logoUrl||"Logo সেট করা হয়নি";$("bannerUrl").textContent=d.bannerUrl||"Banner সেট করা হয়নি"}}
+$("saveNotice").onclick=async()=>{try{await setDoc(doc(db,"settings","notice"),{enabled:$("noticeEnabled").value==="true",title:$("noticeTitle").value.trim(),message:$("noticeMessage").value.trim(),updatedAt:new Date().toISOString()});say("Notice Save হয়েছে।",true)}catch(e){say("Notice Save হয়নি: "+e.message)}};
+async function loadNotice(){let s=await getDoc(doc(db,"settings","notice"));if(s.exists()){let d=s.data();$("noticeEnabled").value=String(d.enabled!==false);$("noticeTitle").value=d.title||"";$("noticeMessage").value=d.message||""}}
+$("saveOffer").onclick=async()=>{let price=Number($("offerPrice").value);if(!Number.isFinite(price)||price<0){say("সঠিক Price দিন।");return}try{await setDoc(doc(db,"settings","fridayOffer"),{enabled:$("offerEnabled").value==="true",price,updatedAt:new Date().toISOString()});say("Offer Save হয়েছে।",true)}catch(e){say("Offer Save হয়নি: "+e.message)}};
+async function loadOffer(){let s=await getDoc(doc(db,"settings","fridayOffer"));if(s.exists()){let d=s.data();$("offerEnabled").value=String(d.enabled!==false);$("offerPrice").value=d.price??150}}
+$("refreshOrders").onclick=async()=>{try{let s=await getDocs(query(collection(db,"orders"),orderBy("createdAt","desc"),limit(50)));$("orderCount").textContent=s.size;$("orderList").className=s.size?"":"empty";$("orderList").innerHTML=s.docs.map(d=>{let x=d.data();return `<div class="item"><div><b>${esc(x.packageName||x.name||"Order")}</b><small>Order ${esc(d.id)} · UID ${esc(x.uid||"—")} · ৳${esc(x.price??"—")} · ${esc(x.status||"pending")}</small></div></div>`}).join("")||"কোনো Order নেই।";say("Orders Refresh হয়েছে।",true)}catch(e){say("Orders Load হয়নি: "+e.message)}};
+$("refreshUsers").onclick=async()=>{try{let s=await getDocs(query(collection(db,"users"),limit(100)));$("userCount").textContent=s.size;$("userList").className=s.size?"":"empty";$("userList").innerHTML=s.docs.map(d=>{let x=d.data();return `<div class="item"><div><b>${esc(x.displayName||x.name||"User")}</b><small>${esc(x.email||"Email নেই")} · UID ${esc(d.id)}</small></div></div>`}).join("")||"কোনো User Profile নেই।";say("User Profiles Refresh হয়েছে।",true)}catch(e){say("Users Load হয়নি: "+e.message)}};
+$("loginBtn").onclick=async()=>{try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("password").value);$("password").value=""}catch(e){say("Login হয়নি: "+e.message)}};
 $("logoutBtn").onclick=()=>signOut(auth);
-onAuthStateChanged(auth,async user=>{if(!user){$("loginCard").classList.remove("hidden");$("dashboard").classList.add("hidden");$("adminEmail").textContent="Not signed in";return;}if(user.uid!==ADMIN_UID){await signOut(auth);say("এই Account Admin নয়। Access denied.");return;}$("loginCard").classList.add("hidden");$("dashboard").classList.remove("hidden");$("adminEmail").textContent=user.email||"Verified Admin";say("Admin Login সফল।",true);try{await Promise.all([loadProducts(),loadBranding(),loadOffer()]);}catch(e){say("ডেটা লোড হয়নি: "+e.message);}});
-document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("hidden",x.id!==b.dataset.tab));});
-} catch(err) {
- console.error("TOP1 SHOP Firebase startup error", err);
- say("Firebase চালু হয়নি: "+(err.message||String(err))+" — Internet connection ও GitHub Pages URL পরীক্ষা করো।");
- $("loginBtn").disabled=true;
-}
-</script>
-<!-- Security note: also enforce the admin UID in Firestore Security Rules. The UID check in this page alone is not a security boundary. -->
-</body></html>
+onAuthStateChanged(auth,async u=>{if(!u){$("loginCard").classList.remove("hidden");$("dashboard").classList.add("hidden");$("adminEmail").textContent="Not signed in";return}if(u.uid!==ADMIN_UID){await signOut(auth);say("এই Account Admin নয়। Access Denied.");return}$("loginCard").classList.add("hidden");$("dashboard").classList.remove("hidden");$("adminEmail").textContent=u.email||"Verified Admin";say("Admin Login সফল।",true);try{await Promise.all([loadProducts(),loadBrand(),loadNotice(),loadOffer()])}catch(e){say("কিছু ডেটা Load হয়নি: "+e.message)}});
+</script></body></html>
