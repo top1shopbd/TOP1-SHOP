@@ -47,8 +47,34 @@ import{initializeApp,getApps}from"https://www.gstatic.com/firebasejs/10.14.1/fir
 import{getFirestore,collection,onSnapshot,doc}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 const config={apiKey:"AIzaSyCDmfbwfPjpAuYmvyBoB3naIDIdUewP0Q8",authDomain:"top1-shop.firebaseapp.com",projectId:"top1-shop",storageBucket:"top1-shop.firebasestorage.app",messagingSenderId:"75243074139",appId:"1:75243074139:web:e325c89d9a88f71848057e",measurementId:"G-RFLZGST4GP"};
 try{const app=getApps().length?getApps()[0]:initializeApp(config),db=getFirestore(app);
-onSnapshot(collection(db,"products"),s=>{let rows=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(Number(a.sortOrder)||0)-(Number(b.sortOrder)||0));if(!rows.length)return;DIAMONDS=rows.filter(p=>p.category==="diamond");MEMBERSHIPS=rows.filter(p=>p.category==="membership");WEEKLY_PACKAGES=rows.filter(p=>p.category==="weekly");FRIDAY_PACKAGES=rows.filter(p=>p.category==="friday");if(selected){let updated=rows.find(p=>p.id===selected.id);selected=updated?{...updated,type:selected.type}:null}renderPackages();if(selected)updateSummary()},e=>console.error("Products sync error",e));
-onSnapshot(doc(db,"settings","branding"),s=>{if(!s.exists())return;let d=s.data();if(d.logoUrl){$("siteLogo").src=d.logoUrl;$("siteLogo").style.display="block";$("siteLogo").nextElementSibling.style.display="none"}if(d.bannerUrl){$("siteBanner").src=d.bannerUrl;$("siteBanner").style.display="block";$("bannerFallback").style.display="none"}},e=>console.error("Branding sync error",e));
+onSnapshot(collection(db,"products"),s=>{
+ let rows=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(Number(a.sortOrder)||0)-(Number(b.sortOrder)||0));
+ // Empty collection must clear the package lists too (e.g. after deleting the last package).
+ DIAMONDS=rows.filter(p=>p.category==="diamond");
+ MEMBERSHIPS=rows.filter(p=>p.category==="membership");
+ WEEKLY_PACKAGES=rows.filter(p=>p.category==="weekly");
+ FRIDAY_PACKAGES=rows.filter(p=>p.category==="friday");
+ if(selected){
+   let updated=rows.find(p=>p.id===selected.id);
+   selected=updated?{...updated,type:selected.type}:null;
+ }
+ renderPackages();
+ if(selected)updateSummary();else updateSummary();
+},e=>console.error("Products sync error",e));
+onSnapshot(doc(db,"settings","branding"),s=>{
+ if(!s.exists())return;
+ let d=s.data();
+ if(d.logoUrl){
+   $("siteLogo").src=d.logoUrl;
+   $("siteLogo").style.display="block";
+   $("siteLogo").nextElementSibling.style.display="none";
+ }
+ if(d.bannerUrl){
+   $("siteBanner").src=d.bannerUrl;
+   $("siteBanner").style.display="block";
+   $("bannerFallback").style.display="none";
+ }
+},e=>console.error("Branding sync error",e));
 onSnapshot(doc(db,"settings","notice"),s=>{let box=$("siteNotice");if(!s.exists()||s.data().enabled===false){box.style.display="none";return}let d=s.data();$("noticeTitle").textContent=d.title||"TOP1 SHOP Notice";$("noticeMessage").textContent=d.message||"";box.style.display=(d.title||d.message)?"block":"none"},e=>console.error("Notice sync error",e));
 onSnapshot(doc(db,"settings","fridayOffer"),s=>{if(!s.exists())return;let d=s.data();fridaySettings={enabled:d.enabled!==false,price:Number(d.price??150)};renderPackages()},e=>console.error("Offer sync error",e));
 }catch(e){console.error("Firebase initialization error",e)}
