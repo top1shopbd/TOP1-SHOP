@@ -49,8 +49,26 @@ $("pImageFile").onchange=()=>{let f=$("pImageFile").files[0];if(f){$("pImagePrev
 $("pImageUrl").oninput=()=>{let u=$("pImageUrl").value.trim();if(u){$("pImagePreview").src=u;$("pImagePreview").classList.remove("hidden")}};
 $("saveProduct").onclick=async()=>{let name=$("pName").value.trim(),price=Number($("pPrice").value);if(!name||$("pPrice").value===""||!Number.isFinite(price)||price<0){say("Package Name ও সঠিক Price দিন।");return}let btn=$("saveProduct");btn.disabled=true;try{let imageUrl=$("pImageUrl").value.trim(),file=$("pImageFile").files[0];if(file)imageUrl=await upload(file,"site-assets/package-images");let data={name,price,category:$("pCategory").value,sortOrder:Number($("pOrder").value)||0,imageUrl,updatedAt:new Date().toISOString()};if(editing)await updateDoc(doc(db,"products",editing),data);else await addDoc(collection(db,"products"),{...data,createdAt:new Date().toISOString()});clearForm();await loadProducts();say("Package Firestore-এ Save হয়েছে। Customer site-এ Live দেখাতে index.html-এ live Firestore read থাকতে হবে।",true)}catch(e){say("Save হয়নি: "+e.message)}finally{btn.disabled=false}};
 $("cancelEdit").onclick=clearForm;
-async function brand(kind){try{let url=await upload($(kind+"File").files[0],"site-assets");await setDoc(doc(db,"settings","branding"),{[kind+"Url"]:url,updatedAt:new Date().toISOString()},{merge:true});$(kind+"Url").textContent="Saved: "+url;say(kind+" Upload ও Save হয়েছে।",true)}catch(e){say("Upload হয়নি: "+e.message)}}
-$("uploadLogo").onclick=()=>brand("logo");$("uploadBanner").onclick=()=>brand("banner");
+async function brand(kind){
+ const btn=$(kind==="logo"?"uploadLogo":"uploadBanner");
+ const file=$(kind+"File").files[0];
+ if(!file){say(kind==="logo"?"আগে Logo Image নির্বাচন করুন।":"আগে Banner Image নির্বাচন করুন।");return;}
+ btn.disabled=true;btn.textContent="UPLOADING...";say(kind+" Upload শুরু হয়েছে...");
+ try{
+  const url=await upload(file,"site-assets");
+  await setDoc(doc(db,"settings","branding"),{[kind+"Url"]:url,updatedAt:new Date().toISOString()},{merge:true});
+  $(kind+"Url").textContent="Saved: "+url;
+  say((kind==="logo"?"Logo":"Banner")+" Upload ও Firestore Save সফল হয়েছে।",true);
+ }catch(e){
+  console.error("TOP1 branding upload error",e);
+  const code=e&&e.code?e.code+" — ":"";
+  say((kind==="logo"?"Logo":"Banner")+" Save হয়নি: "+code+(e&&e.message?e.message:String(e)));
+ }finally{btn.disabled=false;btn.textContent=kind==="logo"?"UPLOAD LOGO":"UPLOAD BANNER";}
+}
+$("uploadLogo").addEventListener("click",e=>{e.preventDefault();brand("logo")});
+$("uploadBanner").addEventListener("click",e=>{e.preventDefault();brand("banner")});
+$("logoFile").addEventListener("change",()=>{const f=$("logoFile").files[0];if(f)say("Logo নির্বাচন করা হয়েছে: "+f.name+" ("+Math.round(f.size/1024)+" KB)");});
+$("bannerFile").addEventListener("change",()=>{const f=$("bannerFile").files[0];if(f)say("Banner নির্বাচন করা হয়েছে: "+f.name+" ("+Math.round(f.size/1024)+" KB)");});
 const tileFields={tileFriday:["tileFridayFile","tileFridayUrl","fridayUrl"],tileDiamond:["tileDiamondFile","tileDiamondUrl","diamondUrl"],tileMembership:["tileMembershipFile","tileMembershipUrl","membershipUrl"],tileWeekly:["tileWeeklyFile","tileWeeklyUrl","weeklyUrl"]};
 async function uploadTile(key){
  const [fileId,labelId,field]=tileFields[key];
