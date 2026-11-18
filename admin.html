@@ -32,7 +32,7 @@
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import{getFirestore,collection,addDoc,getDocs,doc,updateDoc,deleteDoc,setDoc,getDoc,query,orderBy,limit}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import{getStorage,ref,uploadBytes,getDownloadURL}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+import{getStorage,ref,uploadBytesResumable,getDownloadURL}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
 const firebaseConfig={apiKey:"AIzaSyCDmfbwfPjpAuYmvyBoB3naIDIdUewP0Q8",authDomain:"top1-shop.firebaseapp.com",projectId:"top1-shop",storageBucket:"top1-shop.firebasestorage.app",messagingSenderId:"75243074139",appId:"1:75243074139:web:e325c89d9a88f71848057e",measurementId:"G-RFLZGST4GP"};
 const ADMIN_UID="88Az1yt76AYAwfQ1pEbBPbUD6mg2",app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app),$=id=>document.getElementById(id);
 let products=[],editing=null;
@@ -40,7 +40,18 @@ function say(t,ok=false){$("message").textContent=t;$("message").style.backgroun
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function tab(id){document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));document.querySelectorAll(".tab").forEach(s=>s.classList.toggle("hidden",s.id!==id))}
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>tab(b.dataset.tab));document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>tab(b.dataset.goto));
-async function upload(file,folder){if(!file)throw Error("আগে ছবি নির্বাচন করুন।");if(!file.type.startsWith("image/"))throw Error("শুধু Image File Upload করা যাবে।");if(file.size>5*1024*1024)throw Error("ছবির সাইজ ৫ MB-এর কম হতে হবে।");let r=ref(storage,folder+"/"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_"));await uploadBytes(r,file,{contentType:file.type});return getDownloadURL(r)}
+async function upload(file,folder){
+ if(!file)throw Error("আগে ছবি নির্বাচন করুন।");
+ if(!file.type.startsWith("image/"))throw Error("শুধু Image File Upload করা যাবে।");
+ if(file.size>5*1024*1024)throw Error("ছবির সাইজ ৫ MB-এর কম হতে হবে।");
+ const r=ref(storage,folder+"/"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_"));
+ const task=uploadBytesResumable(r,file,{contentType:file.type});
+ return await new Promise((resolve,reject)=>{
+  let lastProgress=Date.now();
+  const stall=setInterval(()=>{if(Date.now()-lastProgress>45000){clearInterval(stall);task.cancel();reject(Error("৪৫ সেকেন্ড ধরে Upload এগোয়নি। Internet বা Firebase Storage Rules পরীক্ষা করুন।"));}},5000);
+  task.on("state_changed",snap=>{lastProgress=Date.now();const pct=snap.totalBytes?Math.round(snap.bytesTransferred/snap.totalBytes*100):0;say("ছবি Upload হচ্ছে... "+pct+"% ("+Math.round(snap.bytesTransferred/1024)+" KB / "+Math.round(snap.totalBytes/1024)+" KB)");},err=>{clearInterval(stall);reject(err);},async()=>{clearInterval(stall);try{resolve(await getDownloadURL(task.snapshot.ref));}catch(e){reject(e);}});
+ });
+}
 async function loadProducts(){let s=await getDocs(query(collection(db,"products"),orderBy("sortOrder","asc")));products=s.docs.map(d=>({id:d.id,...d.data()}));$("productCount").textContent=products.length;$("productList").className=products.length?"":"empty";$("productList").innerHTML=products.map(p=>`<div class="item"><div>${p.imageUrl?`<img class="thumb" src="${esc(p.imageUrl)}">`:"💎"}<b>${esc(p.name)}</b><small>${esc(p.category)} · ৳${esc(p.price)}</small></div><div class="actions"><button class="small" data-edit="${esc(p.id)}">EDIT</button><button class="small red" data-del="${esc(p.id)}">DELETE</button></div></div>`).join("")||"এখনো কোনো Package নেই।";$("productList").querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>edit(b.dataset.edit));$("productList").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>remove(b.dataset.del))}
 function clearForm(){editing=null;$("editId").value="";$("pName").value="";$("pPrice").value="";$("pCategory").value="diamond";$("pOrder").value="10";$("pImageUrl").value="";$("pImageFile").value="";$("pImagePreview").classList.add("hidden");$("saveProduct").textContent="SAVE PACKAGE"}
 function edit(id){let p=products.find(x=>x.id===id);if(!p)return;editing=id;$("editId").value=id;$("pName").value=p.name||"";$("pPrice").value=p.price??"";$("pCategory").value=p.category||"diamond";$("pOrder").value=p.sortOrder??10;$("pImageUrl").value=p.imageUrl||"";$("pImagePreview").src=p.imageUrl||"";$("pImagePreview").classList.toggle("hidden",!p.imageUrl);$("saveProduct").textContent="UPDATE PACKAGE";window.scrollTo({top:0,behavior:"smooth"})}
